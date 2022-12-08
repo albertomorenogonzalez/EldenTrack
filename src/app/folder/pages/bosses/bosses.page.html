@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{'title.bosses' | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col *ngFor="let boss of getBoss() | async" size="6" size-xl="3">
+      <app-boss [boss]="boss"></app-boss>
+    </ion-col>
+  </ion-row>
+</ion-content>

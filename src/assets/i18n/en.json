@@ -1,0 +1,20 @@
+{
+  "title": {
+    "register":"Register a New User",
+    "home":"Home",
+    "profile":"Profile",
+    "bosses":"Bosses",
+    "social":"Social",
+    "about":"About"
+  },
+
+  "home": {
+    "slogan":"Rise, Ye Tarnished",
+    "language":"Language: English",
+    "action":"Tap to change language"
+  },
+
+  "user": {
+    "birthdate":"Birth Date"
+  }
+}

@@ -4,21 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FolderPageRoutingModule } from './folder-routing.module';
+import { AboutPageRoutingModule } from './about-routing.module';
 
-import { FolderPage } from './folder.page';
-import { CoreModule } from '../core/core.module';
+import { AboutPage } from './about.page';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { createTranslateLoader } from '../core';
+import { createTranslateLoader } from 'src/app/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FolderPageRoutingModule,
-    CoreModule,
+    AboutPageRoutingModule,
     HttpClientModule,
     TranslateModule.forChild({
       loader: {
@@ -28,6 +26,6 @@ import { createTranslateLoader } from '../core';
       }
       }),
   ],
-  declarations: [FolderPage]
+  declarations: [AboutPage]
 })
-export class FolderPageModule {}
+export class AboutPageModule {}

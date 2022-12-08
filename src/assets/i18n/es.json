@@ -1,0 +1,20 @@
+{
+  "title": {
+    "register":"Registro de un Nuevo Usuario",
+    "home":"Inicio",
+    "profile":"Perfil",
+    "bosses":"Jefes",
+    "social":"Social",
+    "about":"Sobre mí"
+  },
+
+  "home": {
+    "slogan":"Álzate, Sinluz",
+    "language":"Idioma: Español",
+    "action":"Pulse para cambiar de idioma"
+  },
+
+  "user": {
+    "birthdate":"Fecha de Nacimiento"
+  }
+}

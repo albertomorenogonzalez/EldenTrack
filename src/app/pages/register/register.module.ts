@@ -1,24 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FolderPageRoutingModule } from './folder-routing.module';
+import { RegisterPageRoutingModule } from './register-routing.module';
 
-import { FolderPage } from './folder.page';
-import { CoreModule } from '../core/core.module';
+import { RegisterPage } from './register.page';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { createTranslateLoader } from '../core';
+import { createTranslateLoader } from 'src/app/core';
+import { RegisterFormComponent } from 'src/app/core/components/register-form/register-form.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FolderPageRoutingModule,
-    CoreModule,
+    RegisterPageRoutingModule,
+    ReactiveFormsModule,
     HttpClientModule,
     TranslateModule.forChild({
       loader: {
@@ -28,6 +28,6 @@ import { createTranslateLoader } from '../core';
       }
       }),
   ],
-  declarations: [FolderPage]
+  declarations: [RegisterPage, RegisterFormComponent]
 })
-export class FolderPageModule {}
+export class RegisterPageModule {}
