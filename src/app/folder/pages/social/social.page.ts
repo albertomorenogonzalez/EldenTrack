@@ -12,7 +12,6 @@ export class SocialPage implements OnInit {
 
   constructor(
     private data: UserService,
-    private modal: ModalController,
     private alert: AlertController,
   ) { }
 

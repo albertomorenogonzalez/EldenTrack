@@ -1,11 +1,14 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>{{'title.profile' | translate}}</ion-title>
+    <!-- (onEdit)="onEditProfile($event)" iría en este botón, que está puesto aquí porque no sé como mostrar
+    los datos del usuario registrado y debajo solo sus asignamientos-->
+    <ion-button  slot="end"><ion-icon name="create-outline"></ion-icon></ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ng-container>
-    
-  </ng-container>
+  <ion-col *ngFor="let completedb of getCompletedBoss() | async" size="6" size-xl="3">
+    <app-completed-boss [completedb]="completedb" (onEdit)="onEditCompletedBoss($event)" (onDelete)="onDeleteCompletedBoss($event)"></app-completed-boss>
+  </ion-col>
 </ion-content>

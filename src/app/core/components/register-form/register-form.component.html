@@ -29,7 +29,7 @@
       <ion-input placeholder="Foto de Perfil" formControlName="profilePick" type="text"></ion-input>
     </ion-item>
     <div class="login-submit-button">
-      <ion-button [disabled]="!form.valid" type="submit">Registrarse</ion-button>
+      <ion-button [disabled]="!form.valid" type="submit">{{mode=="Edit" ? "Editar" : "Registrarse"}}</ion-button>
     </div>
   </form>
 </ion-content>

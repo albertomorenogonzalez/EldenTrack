@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -11,10 +11,12 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { createTranslateLoader } from 'src/app/core';
 import { BossComponent } from 'src/app/core/components/boss/boss.component';
+import { BossFormComponent } from 'src/app/core/components/boss-form/boss-form.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     FormsModule,
     IonicModule,
     BossesPageRoutingModule,
@@ -27,6 +29,6 @@ import { BossComponent } from 'src/app/core/components/boss/boss.component';
       }
       }),
   ],
-  declarations: [BossesPage, BossComponent]
+  declarations: [BossesPage, BossComponent, BossFormComponent]
 })
 export class BossesPageModule {}

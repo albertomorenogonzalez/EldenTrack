@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular/providers/modal-controller';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -20,8 +19,8 @@ export class LoginPage implements OnInit, OnDestroy {
     private fb:FormBuilder
   ) { 
     this.form = this.fb.group({
-      username:["", [Validators.required]],
-      password:["", [Validators.required]],
+      username:["Gyobu Oniwa", [Validators.required]],
+      password:["Ashina3", [Validators.required]],
     });
     this.subscr = this.userSvc.userConnected$.subscribe(connected=>{
       if(connected)
@@ -36,7 +35,7 @@ export class LoginPage implements OnInit, OnDestroy {
   }
 
   onSubmit(){
-    this.userSvc.findUser(this.form.value);
+    this.userSvc.validateUser(this.form.value);
   }
 
   onNewUser() {

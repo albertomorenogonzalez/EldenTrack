@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from '../../models/user.model';
-import { LocaleService } from '../../services/localeService';
+import { LocaleService } from '../../services';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss'],
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss'],
 })
-export class UserComponent implements OnInit {
+export class ProfileComponent implements OnInit {
 
   @Output() onEdit = new EventEmitter;
   @Output() onDelete = new EventEmitter;
@@ -23,10 +23,5 @@ export class UserComponent implements OnInit {
     this.onEdit.emit(this.user);
   }
 
-  onDeleteClick(){
-    this.onDelete.emit(this.user);
-  }
-
-  
 
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { User } from '../../models/user.model';
 import { UserService } from '../../services';
 
 @Component({
@@ -11,10 +11,23 @@ import { UserService } from '../../services';
 export class RegisterFormComponent implements OnInit {
 
   form:FormGroup;
-  
+  mode:"New" | "Edit" = "New";
+  @Input('user') set user(user:User) {
+    if(user) {
+      this.form.controls['id'].setValue(user.id);
+      this.form.controls['admin'].setValue(user.admin);
+      this.form.controls['name'].setValue(user.name);
+      this.form.controls['surname'].setValue(user.surname);
+      this.form.controls['birthdate'].setValue(user.birthdate);
+      this.form.controls['email'].setValue(user.email);
+      this.form.controls['username'].setValue(user.username);
+      this.form.controls['password'].setValue(user.password);
+      this.form.controls['profilePick'].setValue(user.profilePick);
+      this.mode = "Edit";
+    }
+  }
 
   constructor(
-    private router:Router,
     private userData:UserService,
     private fb:FormBuilder
   ) { 

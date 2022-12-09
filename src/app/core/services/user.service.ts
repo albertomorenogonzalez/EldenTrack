@@ -7,9 +7,7 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UserService {
-  deletePersonById(id: any) {
-    throw new Error('Method not implemented.');
-  }
+  
   private _userList: User[] = [
     {
       id: 1,
@@ -91,17 +89,36 @@ export class UserService {
   ) { 
   }
 
-  getUser(){
+  getUser() {
     return this._userList;
   }
 
-  addUser(user:User){
+  getUserById(id: number) {
+    return this._userList.find(u=>u.id==id);
+  }
+
+  addUser(user:User) {
     user.id = this.id++;
     this._userList.push(user);
     this._user.next(this._userList);
   }
 
-  findUser(user:User) {
+  updateUser(user:User) {
+    var _user = this._userList.find(u=>u.id==user.id);
+    if(_user){
+      _user.name = user.name;
+      _user.surname = user.surname;
+      _user.birthdate = user.birthdate;
+      _user.email = user.email;
+      _user.username = user.username;
+      _user.password = user.password;
+      _user.profilePick = user.profilePick
+    }
+    
+    this._user.next(this._userList);
+  }
+
+  validateUser(user:User) {
     var userLogin = this._userList.find(u=>u.username==user.username)
 
     if (userLogin?.password==user.password) {
@@ -113,16 +130,16 @@ export class UserService {
     
   }
 
-  login(){
+  login() {
     this._userConnected.next(true);
   }
 
-  disconnect(){
+  disconnect() {
     this._userConnected.next(false);
     this.router.navigate(['folder/home']);
   }
 
-  deleteUserById(id:number){
+  deleteUserById(id:number) {
     this._userList = this._userList.filter(u=>u.id != id); 
     this._user.next(this._userList);
   }

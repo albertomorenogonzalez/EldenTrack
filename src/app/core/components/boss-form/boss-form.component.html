@@ -1,0 +1,31 @@
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Nombre del Jefe</ion-label>
+      <ion-input placeholder="Nombre" formControlName="name" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Área del jefe</ion-label>
+      <ion-input placeholder="Área" formControlName="area" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Localización concreta del jefe</ion-label>
+      <ion-input placeholder="Localización" formControlName="location" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-input placeholder="Descripción" formControlName="description" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Número de Puntos de Vida</ion-label>
+      <ion-input placeholder="Puntos de Vida" formControlName="lifePoints" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Imagen del jefe</ion-label>
+      <ion-input placeholder="Imagen" formControlName="image" type="text"></ion-input>
+    </ion-item>
+    <div>
+      <ion-button [disabled]="!form.valid" type="submit">{{mode=="Edit" ? "Editar" : "Añadir"}}</ion-button>
+    </div>
+  </form>
+</ion-content>

@@ -15,11 +15,14 @@ export class BossComponent implements OnInit {
   @Input() boss!: Boss;
 
   constructor(
-    private data: BossService,
     public locale:LocaleService
   ) { }
 
   ngOnInit() {}
+
+  onAddClick(){
+    
+  }
 
   onEditClick(){
     this.onEdit.emit(this.boss);
