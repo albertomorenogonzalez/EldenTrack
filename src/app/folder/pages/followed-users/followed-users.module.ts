@@ -26,6 +26,6 @@ import { createTranslateLoader, UserComponent } from 'src/app/core';
       }
       }),
   ],
-  declarations: [FollowedUsersPage, UserComponent]
+  declarations: [FollowedUsersPage]
 })
 export class FollowedUsersPageModule {}
