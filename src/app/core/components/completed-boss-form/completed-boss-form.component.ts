@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { Boss } from '../../models/boss.model';
 import { CompletedBoss } from '../../models/completed-boss.model';
 
 @Component({

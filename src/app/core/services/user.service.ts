@@ -83,6 +83,8 @@ export class UserService {
   private _user:BehaviorSubject<User[]> = new BehaviorSubject(this._userList);
   public user$ = this._user.asObservable();
 
+  public currentUser:User|undefined=undefined;
+
   id:number = this._userList.length+1;
   constructor(
     private router:Router
@@ -122,6 +124,7 @@ export class UserService {
     var userLogin = this._userList.find(u=>u.username==user.username)
 
     if (userLogin?.password==user.password) {
+      this.currentUser = userLogin;
       this.login()
     } else {
       console.log("Usuario no encontrado")

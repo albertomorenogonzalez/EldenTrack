@@ -8,7 +8,7 @@ import { CompletedBossService } from 'src/app/core/services/completed-boss.servi
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'app-profile-page',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
@@ -18,7 +18,7 @@ export class ProfilePage implements OnInit {
     private userData: UserService,
     private completedBossData: CompletedBossService,
     private alert: AlertController,
-    private modal: ModalController,
+    private modal: ModalController
   ) { 
 
   }
@@ -26,11 +26,11 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
   }
 
-  getUserActive(id:number) {
-    return this.userData.getUserById(id);
+  getUserActive():User|undefined {
+    return this.userData.currentUser;
   }
 
-  getCompletedBoss() {
+  getCompletedBosses() {
     return this.completedBossData.completedBoss$;
   }
 
@@ -57,10 +57,6 @@ export class ProfilePage implements OnInit {
     });
   }
 
-  onNewCompletedBoss(){
-    this.presentCompletedBossForm();  
-  }
-
   onEditCompletedBoss(completedb: CompletedBoss){
     this.presentCompletedBossForm(completedb);
   }
@@ -76,9 +72,6 @@ export class ProfilePage implements OnInit {
     modal.onDidDismiss().then(result=>{
       if(result && result.data){
         switch(result.data.mode){
-          case 'New':
-            this.userData.addUser(result.data.user);
-            break;
           case 'Edit':
             this.userData.updateUser(result.data.user);
             break;

@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { FolderPage } from './folder.page';
-
 const routes: Routes = [
   {
     path: '',
@@ -30,9 +28,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule)
   },
   {
-    path: 'register',
-    loadChildren: () => import('../pages/register/register.module').then( m => m.RegisterPageModule)
+    path: 'explore',
+    loadChildren: () => import('./pages/explore/explore.module').then( m => m.ExplorePageModule)
+  },
+  {
+    path: 'followed-users',
+    loadChildren: () => import('./pages/followed-users/followed-users.module').then( m => m.FollowedUsersPageModule)
   }
+
 ];
 
 @NgModule({

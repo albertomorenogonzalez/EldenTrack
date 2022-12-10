@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
 import { User } from '../../models/user.model';
-import { UserService } from '../../services';
 
 @Component({
   selector: 'app-register-form',
@@ -28,8 +28,8 @@ export class RegisterFormComponent implements OnInit {
   }
 
   constructor(
-    private userData:UserService,
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private modal:ModalController
   ) { 
     this.form = this.fb.group({
       id:[null],
@@ -54,7 +54,11 @@ export class RegisterFormComponent implements OnInit {
   
 
   onSubmit(){
-    this.userData.addUser(this.form.value);
+    this.modal.dismiss({user: this.form.value, mode:this.mode}, 'ok');
+  }
+
+  onDismiss(){
+    this.modal.dismiss(null, 'cancel');
   }
 
   

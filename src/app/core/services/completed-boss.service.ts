@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { CompletedBoss } from '../models/completed-boss.model';
-import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +42,10 @@ export class CompletedBossService {
 
   getCompletedBossById(id: number) {
     return this._completedBossesList.find(c=>c.id==id);
+  }
+
+  getCompletedBossesByUserId(idUser: number) {
+    return this._completedBossesList.filter(c=>c.idUser == idUser)
   }
 
   addCompletedBoss(completedBoss:CompletedBoss) {

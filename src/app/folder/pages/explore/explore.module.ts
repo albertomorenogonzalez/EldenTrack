@@ -1,24 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RegisterPageRoutingModule } from './register-routing.module';
+import { ExplorePageRoutingModule } from './explore-routing.module';
 
-import { RegisterPage } from './register.page';
+import { ExplorePage } from './explore.page';
+import { createTranslateLoader, UserComponent } from 'src/app/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { createTranslateLoader } from 'src/app/core';
-import { RegisterFormComponent } from 'src/app/core/components/register-form/register-form.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RegisterPageRoutingModule,
-    ReactiveFormsModule,
+    ExplorePageRoutingModule,
     HttpClientModule,
     TranslateModule.forChild({
       loader: {
@@ -28,6 +26,6 @@ import { RegisterFormComponent } from 'src/app/core/components/register-form/reg
       }
       }),
   ],
-  declarations: [RegisterPage, RegisterFormComponent]
+  declarations: [ExplorePage, UserComponent]
 })
-export class RegisterPageModule {}
+export class ExplorePageModule {}

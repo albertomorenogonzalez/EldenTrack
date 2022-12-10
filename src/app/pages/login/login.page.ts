@@ -1,7 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
+import { RegisterFormComponent } from 'src/app/core';
+import { User } from 'src/app/core/models/user.model';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
@@ -16,6 +19,7 @@ export class LoginPage implements OnInit, OnDestroy {
   constructor(
     private router:Router,
     private userSvc:UserService,
+    private modal: ModalController,
     private fb:FormBuilder
   ) { 
     this.form = this.fb.group({
@@ -38,10 +42,28 @@ export class LoginPage implements OnInit, OnDestroy {
     this.userSvc.validateUser(this.form.value);
   }
 
-  onNewUser() {
-    this.router.navigate(['register']);
+  async presentUserForm(user?:User){
+    const modal = await this.modal.create({
+      component:RegisterFormComponent,
+      componentProps:{
+        user:user
+      }
+    });
+    modal.present();
+    modal.onDidDismiss().then(result=>{
+      if(result && result.data){
+        switch(result.data.mode){
+          case 'New':
+            this.userSvc.addUser(result.data.user);
+            break;
+          default:
+        }
+      }
+    });
   }
 
-  
+  onNewUser() {
+    this.presentUserForm();
+  }
 
 }

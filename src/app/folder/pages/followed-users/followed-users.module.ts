@@ -1,24 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LoginPageRoutingModule } from './login-routing.module';
+import { FollowedUsersPageRoutingModule } from './followed-users-routing.module';
 
-import { LoginPage } from './login.page';
+import { FollowedUsersPage } from './followed-users.page';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { createTranslateLoader, RegisterFormComponent } from 'src/app/core';
-import { DateTimeSelectableComponent } from 'src/app/core/components/datetimeselectable/datetimeselectable.component';
+import { createTranslateLoader, UserComponent } from 'src/app/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginPageRoutingModule,
-    ReactiveFormsModule,
+    FollowedUsersPageRoutingModule,
     HttpClientModule,
     TranslateModule.forChild({
       loader: {
@@ -28,6 +26,6 @@ import { DateTimeSelectableComponent } from 'src/app/core/components/datetimesel
       }
       }),
   ],
-  declarations: [LoginPage, RegisterFormComponent, DateTimeSelectableComponent]
+  declarations: [FollowedUsersPage, UserComponent]
 })
-export class LoginPageModule {}
+export class FollowedUsersPageModule {}

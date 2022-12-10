@@ -11,13 +11,17 @@ export class UserComponent implements OnInit {
 
   @Output() onEdit = new EventEmitter;
   @Output() onDelete = new EventEmitter;
-  @Input() user!: User;
+  @Input() user: User | undefined;
   
   constructor(
     public locale:LocaleService
   ) { }
 
   ngOnInit() {}
+
+  onFollowUser() {
+    
+  }
 
   onEditClick(){
     this.onEdit.emit(this.user);

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { BossFormComponent } from 'src/app/core/components/boss-form/boss-form.component';
+import { CompletedBossFormComponent } from 'src/app/core/components/completed-boss-form/completed-boss-form.component';
 import { Boss } from 'src/app/core/models/boss.model';
+import { CompletedBoss } from 'src/app/core/models/completed-boss.model';
 import { BossService } from 'src/app/core/services/boss.service';
+import { CompletedBossService } from 'src/app/core/services/completed-boss.service';
 
 @Component({
   selector: 'app-bosses',
@@ -13,6 +16,7 @@ export class BossesPage implements OnInit {
   
   constructor(
     private data: BossService,
+    private completedBossData: CompletedBossService,
     private alert: AlertController,
     private modal: ModalController,
   ) { }
@@ -82,7 +86,6 @@ export class BossesPage implements OnInit {
     const { role } = await alert.onDidDismiss();
   }
 
-  
 
   onDeleteBoss(boss: Boss){
      this.onDeleteAlert(boss);

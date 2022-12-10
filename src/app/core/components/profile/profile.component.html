@@ -1,4 +1,4 @@
-<ion-card>
+<ion-card *ngIf="user">
   <ion-card-header>
     <img alt="{{user.name}} {{user.surname}}" src="{{user.profilePick}}">
     <ion-grid>
@@ -9,7 +9,7 @@
           <ion-card-subtitle>{{'user.birthdate' | translate}}: {{user.birthdate | date:'shortDate':undefined:locale.locale}}</ion-card-subtitle>
         </ion-col>
         <ion-col size="3">
-          <ion-button color="danger" (click)="onEditClick()"><ion-icon name="trash-outline" ></ion-icon></ion-button>
+          <ion-button (click)="onEditClick()"><ion-icon name="create-outline" ></ion-icon></ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

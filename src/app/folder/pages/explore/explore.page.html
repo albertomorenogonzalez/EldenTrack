@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>explore</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col *ngFor="let user of getUser() | async" size="6" size-xl="3">
+      <app-user [user]="user" (onDelete)="onDeleteUser($event)"></app-user>
+    </ion-col>
+  </ion-row>
+  
+</ion-content>
