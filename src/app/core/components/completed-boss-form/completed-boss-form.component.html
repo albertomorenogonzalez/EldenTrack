@@ -1,20 +1,15 @@
 <ion-content>
   <form [formGroup]="form" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()">
     <ion-item>
-      <ion-label position="floating">ID del Jefe</ion-label>
-      <ion-input placeholder="id Boss" formControlName="idBoss" type="number"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">ID del Usuario</ion-label>
-      <ion-input placeholder="id User" formControlName="idUser" type="number"></ion-input>
+      <ion-img src="{{getBossById(completedb.idBoss)?.image}}"></ion-img>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Fecha de Inicio</ion-label>
-      <ion-input placeholder="Fecha de Inicio" formControlName="startDate" type="date"></ion-input>
+      <ion-input placeholder="Inserte la echa de inicio" formControlName="startDate" type="date"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Fecha al terminar</ion-label>
-      <ion-input placeholder="Fecha de Fin" formControlName="finishDate" type="date"></ion-input>
+      <ion-label position="floating">Fecha de Fin</ion-label>
+      <ion-input placeholder="Inserte la fecha de Fin" formControlName="finishDate" type="date"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Notas</ion-label>

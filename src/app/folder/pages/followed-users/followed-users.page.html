@@ -6,10 +6,9 @@
 
 <ion-content>
   <ion-row>
-    <!--
-    <ion-col *ngFor="let follow of getFollow() | async" size="6" size-xl="3">
-      <app-user [follow]="follow" ></app-user>
-    </ion-col>-->
+    <ion-col *ngFor="let user of getUserByFollow() | async" size="6" size-xl="3">
+      
+    </ion-col>
   </ion-row>
 
 </ion-content>

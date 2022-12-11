@@ -9,6 +9,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { createTranslateLoader } from './utils/translate';
 import en from '@angular/common/locales/en';
 import es from '@angular/common/locales/es';
+import { UserComponent } from './components';
+import { DateTimeSelectableComponent } from './components/datetimeselectable/datetimeselectable.component';
 
 export class LocaleId extends String{
   constructor(private locale:LocaleService){
@@ -29,8 +31,6 @@ registerLocaleData(en)
 
 @NgModule({
   declarations: [
-    
-
   ],
   imports: [
     CommonModule,
@@ -51,7 +51,7 @@ registerLocaleData(en)
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    HttpClientModule,
+    HttpClientModule
   ],
 
   providers: [
@@ -62,7 +62,7 @@ registerLocaleData(en)
     useClass: LocaleId
   },
  
-  ],
+  ]
 })
 export class CoreModule { }
 

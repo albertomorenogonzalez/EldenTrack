@@ -2,6 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { CompletedBoss } from '../../models/completed-boss.model';
+import { UserService } from '../../services';
+import { BossComponent } from '../boss/boss.component';
+import { CompletedBossComponent } from '../completed-boss/completed-boss.component';
 
 @Component({
   selector: 'app-completed-boss-form',
@@ -26,14 +29,16 @@ export class CompletedBossFormComponent implements OnInit {
 
   constructor(
     private fb:FormBuilder,
-    private modal:ModalController
+    private modal:ModalController,
+    private data: UserService,
+    private completedbData: CompletedBossComponent
   ) { 
     this.form = this.fb.group({
       id:[null],
       idBoss:["", [Validators.required]],
-      idUser:["", [Validators.required]],
-      startDate:["", [Validators.required]],
-      finishDate:["", [Validators.required]],
+      idUser:[this.data.currentUser?.id, [Validators.required]],
+      startDate:[""],
+      finishDate:[""],
       notes:[""]
     });
   }
@@ -51,6 +56,10 @@ export class CompletedBossFormComponent implements OnInit {
 
   onDismiss(){
     this.modal.dismiss(null, 'cancel');
+  }
+
+  getBossById(id: number) {
+    return this.completedbData.getBossById(id);
   }
 
 }

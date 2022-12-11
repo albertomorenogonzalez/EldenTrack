@@ -9,7 +9,7 @@ import { FollowedUsersPageRoutingModule } from './followed-users-routing.module'
 import { FollowedUsersPage } from './followed-users.page';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { createTranslateLoader, UserComponent } from 'src/app/core';
+import { createTranslateLoader } from 'src/app/core';
 
 @NgModule({
   imports: [

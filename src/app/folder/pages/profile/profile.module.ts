@@ -15,21 +15,21 @@ import { CompletedBossComponent } from 'src/app/core/components/completed-boss/c
 import { CompletedBossFormComponent } from 'src/app/core/components/completed-boss-form/completed-boss-form.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    IonicModule,
-    ProfilePageRoutingModule,
-    HttpClientModule,
-    TranslateModule.forChild({
-      loader: {
-      provide: TranslateLoader,
-      useFactory: (createTranslateLoader),
-      deps: [HttpClient]
-      }
-      }),
-  ],
-  declarations: [ProfilePage, ProfileComponent, CompletedBossComponent, CompletedBossFormComponent]
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        IonicModule,
+        ProfilePageRoutingModule,
+        HttpClientModule,
+        TranslateModule.forChild({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (createTranslateLoader),
+                deps: [HttpClient]
+            }
+        }),
+    ],
+    declarations: [ProfilePage, ProfileComponent, CompletedBossComponent, CompletedBossFormComponent]
 })
 export class ProfilePageModule {}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { UserService } from 'src/app/core';
 import { FollowService } from 'src/app/core/services/follow.service';
 
 @Component({
@@ -10,14 +11,18 @@ import { FollowService } from 'src/app/core/services/follow.service';
 export class FollowedUsersPage implements OnInit {
 
   constructor(
+    private userData: UserService,
     private data: FollowService,
-    private alert: AlertController,
   ) { }
 
   ngOnInit() {
   }
 
-  getFollow() {
-    return this.data.follow$;
+  getUserByFollow() {
+    return this.userData.user$;
+  }
+
+  onDeleteUser() {
+
   }
 }
