@@ -10,14 +10,12 @@ import { ExplorePage } from './explore.page';
 import { createTranslateLoader, UserComponent } from 'src/app/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { CoreModule } from 'src/app/core/core.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
+    CoreModule,
     ExplorePageRoutingModule,
-    HttpClientModule,
     TranslateModule.forChild({
       loader: {
       provide: TranslateLoader,
@@ -26,6 +24,6 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
       }
       }),
   ],
-  declarations: [ExplorePage, UserComponent]
+  declarations: [ExplorePage]
 })
 export class ExplorePageModule {}

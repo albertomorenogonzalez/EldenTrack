@@ -18,7 +18,7 @@ export class ExplorePage implements OnInit {
   ngOnInit() {
   }
 
-  getUser() {
+  getUserList() {
     return this.data.user$;
   }
 

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Boss } from '../../models/boss.model';
 import { CompletedBoss } from '../../models/completed-boss.model';
+import { BossService } from '../../services';
 import { CompletedBossService } from '../../services/completed-boss.service';
 import { LocaleService } from '../../services/localeService';
 import { CompletedBossFormComponent } from '../completed-boss-form/completed-boss-form.component';
@@ -20,7 +21,8 @@ export class BossComponent implements OnInit {
   constructor(
     private modal: ModalController,
     private completedBossData: CompletedBossService,
-    public locale:LocaleService
+    public locale:LocaleService,
+    private data: BossService
   ) { }
 
   ngOnInit() {}
@@ -45,8 +47,9 @@ export class BossComponent implements OnInit {
     });
   }
 
-  onNewCompletedBoss(){
+  onNewCompletedBoss(boss: Boss){
     this.presentCompletedBossForm();  
+    this.data.addedBoss = boss;
   }
 
   onEditClick(){

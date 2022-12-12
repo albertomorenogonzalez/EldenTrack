@@ -24,7 +24,7 @@ export class BossesPage implements OnInit {
   ngOnInit() {
   }
 
-  getBoss() {
+  getBossList() {
     return this.data.boss$;
   }
 

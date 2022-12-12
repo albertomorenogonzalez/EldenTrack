@@ -10,14 +10,12 @@ import { FollowedUsersPage } from './followed-users.page';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { createTranslateLoader } from 'src/app/core';
+import { CoreModule } from 'src/app/core/core.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
+    CoreModule,
     FollowedUsersPageRoutingModule,
-    HttpClientModule,
     TranslateModule.forChild({
       loader: {
       provide: TranslateLoader,

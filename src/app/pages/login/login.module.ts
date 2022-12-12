@@ -9,17 +9,13 @@ import { LoginPageRoutingModule } from './login-routing.module';
 import { LoginPage } from './login.page';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { createTranslateLoader, RegisterFormComponent } from 'src/app/core';
-import { DateTimeSelectableComponent } from 'src/app/core/components/datetimeselectable/datetimeselectable.component';
+import { createTranslateLoader } from 'src/app/core';
+import { CoreModule } from 'src/app/core/core.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
+    CoreModule,
     LoginPageRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
     TranslateModule.forChild({
       loader: {
       provide: TranslateLoader,
@@ -28,6 +24,6 @@ import { DateTimeSelectableComponent } from 'src/app/core/components/datetimesel
       }
       }),
   ],
-  declarations: [LoginPage, RegisterFormComponent, DateTimeSelectableComponent]
+  declarations: [LoginPage]
 })
 export class LoginPageModule {}

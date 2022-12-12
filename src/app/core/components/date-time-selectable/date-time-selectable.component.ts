@@ -13,9 +13,9 @@ export const DATE_TIME_VALUE_ACCESSOR: any = {
 
 
 @Component({
-  selector: 'app-datetimeselectable',
-  templateUrl: './datetimeselectable.component.html',
-  styleUrls: ['./datetimeselectable.component.scss'],
+  selector: 'app-date-time-selectable',
+  templateUrl: './date-time-selectable.component.html',
+  styleUrls: ['./date-time-selectable.component.scss'],
   providers:[DATE_TIME_VALUE_ACCESSOR]
 })
 export class DateTimeSelectableComponent implements OnInit, ControlValueAccessor, OnDestroy {

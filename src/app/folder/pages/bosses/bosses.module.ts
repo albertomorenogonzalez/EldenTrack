@@ -10,17 +10,12 @@ import { BossesPage } from './bosses.page';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { createTranslateLoader } from 'src/app/core';
-import { BossComponent } from 'src/app/core/components/boss/boss.component';
-import { BossFormComponent } from 'src/app/core/components/boss-form/boss-form.component';
+import { CoreModule } from 'src/app/core/core.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    IonicModule,
+    CoreModule,
     BossesPageRoutingModule,
-    HttpClientModule,
     TranslateModule.forChild({
       loader: {
       provide: TranslateLoader,
@@ -29,6 +24,6 @@ import { BossFormComponent } from 'src/app/core/components/boss-form/boss-form.c
       }
       }),
   ],
-  declarations: [BossesPage, BossComponent, BossFormComponent]
+  declarations: [BossesPage]
 })
 export class BossesPageModule {}

@@ -15,13 +15,13 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+      
     return this.userSvc.userConnected$.pipe(tap(connected=>{
       if(!connected)
       
         this.router.navigate(['login']);
         
     }));
-    
   }
   
 }

@@ -86,13 +86,15 @@ export class BossService {
   private _boss:BehaviorSubject<Boss[]> = new BehaviorSubject(this._bossList);
   public boss$ = this._boss.asObservable();
 
+  public addedBoss:Boss|undefined=undefined;
+
   id:number = this._bossList.length+1;
   constructor(
     
   ) { 
   }
 
-  getBoss(){
+  getBossList(){
     return this._bossList;
   }
 

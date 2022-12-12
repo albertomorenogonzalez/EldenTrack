@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
-import { RegisterFormComponent } from 'src/app/core';
+import { BossService, RegisterFormComponent } from 'src/app/core';
 import { CompletedBossFormComponent } from 'src/app/core/components/completed-boss-form/completed-boss-form.component';
 import { CompletedBoss } from 'src/app/core/models/completed-boss.model';
 import { User } from 'src/app/core/models/user.model';
@@ -16,6 +16,7 @@ export class ProfilePage implements OnInit {
 
   constructor(
     private userData: UserService,
+    private bossData: BossService,
     private completedBossData: CompletedBossService,
     private alert: AlertController,
     private modal: ModalController
@@ -45,9 +46,6 @@ export class ProfilePage implements OnInit {
     modal.onDidDismiss().then(result=>{
       if(result && result.data){
         switch(result.data.mode){
-          case 'New':
-            this.completedBossData.addCompletedBoss(result.data.completedb);
-            break;
           case 'Edit':
             this.completedBossData.updateCompletedBoss(result.data.completedb);
             break;
@@ -58,6 +56,7 @@ export class ProfilePage implements OnInit {
   }
 
   onEditCompletedBoss(completedb: CompletedBoss){
+    this.bossData.addedBoss = this.bossData.getBossById(completedb.idBoss)
     this.presentCompletedBossForm(completedb);
   }
 

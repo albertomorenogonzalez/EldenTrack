@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { Console } from 'console';
 import { Subscription } from 'rxjs';
 import { RegisterFormComponent } from 'src/app/core';
 import { User } from 'src/app/core/models/user.model';
@@ -65,5 +66,6 @@ export class LoginPage implements OnInit, OnDestroy {
   onNewUser() {
     this.presentUserForm();
   }
+
 
 }

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { CompletedBoss } from '../models/completed-boss.model';
 
@@ -36,7 +35,7 @@ export class CompletedBossService {
   ) { 
   }
 
-  getCompletedBoss() {
+  getCompletedBosses() {
     return this._completedBossesList;
   }
 

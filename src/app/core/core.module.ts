@@ -9,8 +9,12 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { createTranslateLoader } from './utils/translate';
 import en from '@angular/common/locales/en';
 import es from '@angular/common/locales/es';
-import { UserComponent } from './components';
-import { DateTimeSelectableComponent } from './components/datetimeselectable/datetimeselectable.component';
+import { BossComponent, RegisterFormComponent, UserComponent } from './components';
+import { ProfileComponent } from './components/profile/profile.component';
+import { CompletedBossFormComponent } from './components/completed-boss-form/completed-boss-form.component';
+import { CompletedBossComponent } from './components/completed-boss/completed-boss.component';
+import { DateTimeSelectableComponent } from './components/date-time-selectable/date-time-selectable.component';
+import { BossFormComponent } from './components/boss-form/boss-form.component';
 
 export class LocaleId extends String{
   constructor(private locale:LocaleService){
@@ -31,6 +35,14 @@ registerLocaleData(en)
 
 @NgModule({
   declarations: [
+    UserComponent,
+    RegisterFormComponent,
+    ProfileComponent,
+    BossComponent,
+    BossFormComponent,
+    CompletedBossComponent,
+    CompletedBossFormComponent,
+    DateTimeSelectableComponent,
   ],
   imports: [
     CommonModule,
@@ -51,7 +63,15 @@ registerLocaleData(en)
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    UserComponent,
+    RegisterFormComponent,
+    ProfileComponent,
+    BossComponent,
+    BossFormComponent,
+    CompletedBossComponent,
+    CompletedBossFormComponent,
+    DateTimeSelectableComponent
   ],
 
   providers: [

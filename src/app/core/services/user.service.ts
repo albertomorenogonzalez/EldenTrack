@@ -91,7 +91,7 @@ export class UserService {
   ) { 
   }
 
-  getUser() {
+  getUserList() {
     return this._userList;
   }
 

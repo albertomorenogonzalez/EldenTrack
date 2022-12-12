@@ -10,16 +10,13 @@ import { ProfilePage } from './profile.page';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { createTranslateLoader } from 'src/app/core';
-import { ProfileComponent } from 'src/app/core/components/profile/profile.component';
-import { CompletedBossComponent } from 'src/app/core/components/completed-boss/completed-boss.component';
-import { CompletedBossFormComponent } from 'src/app/core/components/completed-boss-form/completed-boss-form.component';
+import { CoreModule } from 'src/app/core/core.module';
 
 @NgModule({
+    
     imports: [
+        CoreModule,
         CommonModule,
-        ReactiveFormsModule,
-        FormsModule,
-        IonicModule,
         ProfilePageRoutingModule,
         HttpClientModule,
         TranslateModule.forChild({
@@ -28,8 +25,8 @@ import { CompletedBossFormComponent } from 'src/app/core/components/completed-bo
                 useFactory: (createTranslateLoader),
                 deps: [HttpClient]
             }
-        }),
+        })
     ],
-    declarations: [ProfilePage, ProfileComponent, CompletedBossComponent, CompletedBossFormComponent]
+    declarations: [ProfilePage],
 })
 export class ProfilePageModule {}
