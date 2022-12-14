@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Mantinia Regular';
+  src: url('../assets/fonts/mantinia_regular/mantinia_regular.otf') format('otf');
+}
+*{
+  font-family: 'Mantinia Regular';
+}
+
 ion-menu ion-content {
   --background: var(--ion-item-background, var(--ion-background-color, #fff));
 }
@@ -116,4 +124,16 @@ ion-note {
 
 ion-item.selected {
   --color: var(--ion-color-primary);
+}
+
+#logOutButton {
+  width: 135px;
+}
+
+ion-chip {
+  margin-right: 10px;
+}
+
+ion-button {
+  color: white;
 }

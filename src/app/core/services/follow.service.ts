@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Boss } from '../models/boss.model';
 import { Follow } from '../models/follow.model';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,17 +25,22 @@ export class FollowService {
   public follow$ = this._follow.asObservable();
 
   id:number = this._followsList.length+1;
-  constructor(
-    
-  ) { 
-  }
+  constructor() { }
+
+  public idUser: number | undefined;
+  public idFollowed!: number;
+  public followPage: Boolean = false;
 
   getFollowList() {
     return this._followsList;
   }
 
-  getFollowsByUserId(idUser: number) {
+  getFollowsByUserId(idUser?: number) {
     return this._followsList.find(f=>f.idUser == idUser)
+  }
+
+  getFollowById(id: number) {
+    return this._followsList.find(u=>u.id==id);
   }
 
   follow(follow:Follow) {
@@ -48,4 +53,9 @@ export class FollowService {
     this._followsList = this._followsList.filter(f=>f.idFollowed != id); 
     this._follow.next(this._followsList);
   }
+
+  getFollowedUsers(idUser?: number) {
+    return this._followsList.filter(follow=>follow.idUser == idUser)
+  }
+  
 }

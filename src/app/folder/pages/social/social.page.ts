@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, AlertController } from '@ionic/angular';
-import { User } from 'src/app/core/models/user.model';
-import { UserService } from 'src/app/core/services/user.service';
+import { FollowService } from 'src/app/core';
 
 @Component({
   selector: 'app-social',
@@ -10,10 +8,22 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class SocialPage implements OnInit {
 
-  constructor() {
+  constructor(
+    private followData: FollowService
+  ) {
   }
 
   ngOnInit() {
     
   }
+
+  isFollowPage() {
+    return this.followData.followPage = false;
+  }
+
+  isNotFollowPage() {
+    return this.followData.followPage = true;
+  }
+
+
 }

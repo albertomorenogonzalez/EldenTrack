@@ -4,7 +4,12 @@
       <ng-container *ngIf="hasValue">
         <ion-label>{{date$ | async | date:'short'}}</ion-label>
       </ng-container>
-      <ion-label *ngIf="!hasValue">Inserte la fecha</ion-label>
+      <ng-container *ngIf="!hasValue" [ngSwitch]="atributeName">
+          <ion-label *ngSwitchCase="'birthdate'">Inserte la Fecha de Nacimiento</ion-label>
+          <ion-label *ngSwitchCase="'startDate'">Inserte la Fecha de Inicio</ion-label>
+          <ion-label *ngSwitchCase="'finishDate'">Inserte la Fecha de Fin</ion-label>
+          <ion-label *ngSwitchDefault>Inserte la Fecha</ion-label>
+      </ng-container>
     </ion-item>
     <div class="ion-padding" slot="content">
       <ion-datetime #datetime value="{{(date$ | async)}}" (ionChange)="onDateTimeChanged($event, accordion)" locale="{{getLocale()}}">

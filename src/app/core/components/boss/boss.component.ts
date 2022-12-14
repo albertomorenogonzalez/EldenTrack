@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { Boss } from '../../models/boss.model';
 import { CompletedBoss } from '../../models/completed-boss.model';
 import { BossService } from '../../services';
@@ -22,7 +22,8 @@ export class BossComponent implements OnInit {
     private modal: ModalController,
     private completedBossData: CompletedBossService,
     public locale:LocaleService,
-    private data: BossService
+    private data: BossService,
+    private toastController: ToastController
   ) { }
 
   ngOnInit() {}
@@ -40,6 +41,7 @@ export class BossComponent implements OnInit {
         switch(result.data.mode){
           case 'New':
             this.completedBossData.addCompletedBoss(result.data.completedb);
+            this.presentToastAdd();
             break;
           default:
         }
@@ -58,6 +60,18 @@ export class BossComponent implements OnInit {
 
   onDeleteClick(){
     this.onDelete.emit(this.boss);
+  }
+
+  async presentToastAdd() {
+    const toast = await this.toastController.create({
+      message: 'Jefe Completado ¡Enhorabuena!',
+      duration: 1500,
+      position: 'top',
+      color: 'success'
+    });
+
+    await toast.present();
+    
   }
 
 }

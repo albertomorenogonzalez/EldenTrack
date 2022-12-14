@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { BossService, RegisterFormComponent } from 'src/app/core';
 import { CompletedBossFormComponent } from 'src/app/core/components/completed-boss-form/completed-boss-form.component';
 import { CompletedBoss } from 'src/app/core/models/completed-boss.model';
@@ -19,7 +19,8 @@ export class ProfilePage implements OnInit {
     private bossData: BossService,
     private completedBossData: CompletedBossService,
     private alert: AlertController,
-    private modal: ModalController
+    private modal: ModalController,
+    private toastController: ToastController
   ) { 
 
   }
@@ -48,6 +49,7 @@ export class ProfilePage implements OnInit {
         switch(result.data.mode){
           case 'Edit':
             this.completedBossData.updateCompletedBoss(result.data.completedb);
+            this.presentToastUpdate();
             break;
           default:
         }
@@ -73,6 +75,7 @@ export class ProfilePage implements OnInit {
         switch(result.data.mode){
           case 'Edit':
             this.userData.updateUser(result.data.user);
+            this.presentToastUpdate();
             break;
           default:
         }
@@ -101,6 +104,7 @@ export class ProfilePage implements OnInit {
           role: 'confirm',
           handler: () => {
             this.completedBossData.deleteCompletedBossById(completedb.id);
+            this.presentToastDelete();
           },
         },
       ],
@@ -115,6 +119,41 @@ export class ProfilePage implements OnInit {
 
   onDeleteCompletedBoss(completedb: CompletedBoss){
      this.onDeleteAlert(completedb);
-  }  
+  } 
+  
+  getItemDisplay(completdb: CompletedBoss) {
+    var display = 'inline';
 
+    if (this.bossData.getBossById(completdb.idBoss)==null) {
+      display = 'none';
+    } else {
+      display = 'inline';
+    }
+
+    return display;
+  }
+
+  async presentToastUpdate() {
+    const toast = await this.toastController.create({
+      message: 'Datos modificados con éxito',
+      duration: 1500,
+      position: 'top',
+      color: 'success'
+    });
+
+    await toast.present();
+    
+  }
+
+  async presentToastDelete() {
+    const toast = await this.toastController.create({
+      message: 'Jefe Completado eliminados',
+      duration: 1500,
+      position: 'top',
+      color: 'danger'
+    });
+
+    await toast.present();
+    
+  }
 }

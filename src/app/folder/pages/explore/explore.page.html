@@ -1,14 +1,16 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>explore</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-row>
-    <ion-col *ngFor="let user of getUserList() | async" size="6" size-xl="3">
+    <ion-col [ngStyle]="{'display':getItemDisplay(user.id)}" *ngFor="let user of getUserList() | async" size="6" size-xl="3">
       <app-user [user]="user" (onDelete)="onDeleteUser($event)"></app-user>
     </ion-col>
   </ion-row>
-  
 </ion-content>

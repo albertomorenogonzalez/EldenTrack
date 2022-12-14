@@ -1,12 +1,15 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>{{'title.profile' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <app-profile [user]="getUserActive()" (onEdit)="onEditProfile($event)"></app-profile>
-  <ion-col *ngFor="let completedb of getCompletedBosses() | async" size="6" size-xl="3">
+  <ion-col [ngStyle]="{'display':getItemDisplay(completedb)}" *ngFor="let completedb of getCompletedBosses() | async" size="6" size-xl="3">
     <app-completed-boss *ngIf="completedb.idUser==getUserActive()?.id" [completedb]="completedb" (onEdit)="onEditCompletedBoss($event)" (onDelete)="onDeleteCompletedBoss($event)"></app-completed-boss>
   </ion-col>
 </ion-content>

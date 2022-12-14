@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
-import { UserService } from 'src/app/core';
+import { AlertController, ToastController } from '@ionic/angular';
+import { FollowService, UserService } from 'src/app/core';
 import { User } from 'src/app/core/models/user.model';
 
 @Component({
@@ -11,15 +11,15 @@ import { User } from 'src/app/core/models/user.model';
 export class ExplorePage implements OnInit {
 
   constructor(
-    private data: UserService,
-    private alert: AlertController,
+    private userData: UserService,
+    private alert: AlertController
   ) { }
 
   ngOnInit() {
   }
 
   getUserList() {
-    return this.data.user$;
+    return this.userData.user$;
   }
 
   async onDeleteAlert(user: User){
@@ -38,7 +38,7 @@ export class ExplorePage implements OnInit {
           text: await 'Borrar',
           role: 'confirm',
           handler: () => {
-            this.data.deleteUserById(user.id);
+            this.userData.deleteUserById(user.id);
           },
         },
       ],
@@ -53,6 +53,22 @@ export class ExplorePage implements OnInit {
 
   onDeleteUser(user: User){
      this.onDeleteAlert(user);
-  }  
+  } 
+  
+  getCurrentUser(){
+    return this.userData.currentUser;
+  }
+
+  getItemDisplay(idUser: number): string {
+    var display = 'inline';
+
+    if (idUser==this.getCurrentUser()?.id) {
+      display = 'none';
+    } else {
+      display = 'inline';
+    }
+
+    return display;
+  }
 
 }

@@ -56,6 +56,7 @@ export class LoginPage implements OnInit, OnDestroy {
         switch(result.data.mode){
           case 'New':
             this.userSvc.addUser(result.data.user);
+            console.log(result.data.user)
             break;
           default:
         }
@@ -66,6 +67,5 @@ export class LoginPage implements OnInit, OnDestroy {
   onNewUser() {
     this.presentUserForm();
   }
-
 
 }

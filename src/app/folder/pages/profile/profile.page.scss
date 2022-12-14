@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Mantinia Regular';
+  src: url('/src/assets/fonts/mantinia_regular/mantinia_regular.otf') format('otf');
+}
+*{
+  font-family: 'Mantinia Regular';
+}
+
 ion-button {
     margin:10px;
     width:50px;

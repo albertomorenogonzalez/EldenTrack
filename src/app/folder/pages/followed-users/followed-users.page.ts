@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/core';
+import { AlertController, ToastController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { Boss, Follow, User, UserService } from 'src/app/core';
 import { FollowService } from 'src/app/core/services/follow.service';
 
 @Component({
@@ -11,17 +13,88 @@ export class FollowedUsersPage implements OnInit {
 
   constructor(
     private userData: UserService,
-    private data: FollowService
+    private followData: FollowService,
+    private toastController: ToastController,
+    private alert: AlertController
   ) { }
 
   ngOnInit() {
   }
 
-  getCurrentUserId() {
-    return this.userData.currentUser?.id
+  getCurrentUser(){
+    return this.userData.currentUser;
   }
 
-  onDeleteUser() {
-
+  unfollow(follow: Follow) {
+    this.onDeleteAlert(follow);
   }
+
+  getFollowList() {
+    return this.followData.follow$;
+  }
+
+  getUserList() {
+    return this.userData.user$;
+  }
+
+  getFollowedUsers() {
+    return this.followData.getFollowedUsers(this.getCurrentUser()?.id);
+  }
+
+  getUserById(idFollowed: number) {
+    return this.userData.getUserById(idFollowed);
+  }
+
+  getItemDisplay(idFollowed: number) {
+    var display = 'inline';
+
+    if (this.getUserById(idFollowed)==null) {
+      display = 'none';
+    } else {
+      display = 'inline';
+    }
+
+    return display;
+  }
+
+  async onDeleteAlert(follow: Follow){
+    const alert = await this.alert.create({
+      header: await 'Atención',
+      message: await '¿Está seguro de que quiere dejar de seguir a este usuario?',
+      buttons: [
+        {
+          text: await 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log("Operacion cancelada");
+          },
+        },
+        {
+          text: await 'Borrar',
+          role: 'confirm',
+          handler: () => {
+            this.followData.unfollowById(follow.idFollowed);
+            this.presentToastUnfollow(follow.idFollowed);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+  }
+
+  async presentToastUnfollow(idFollowed: number) {
+    const toast = await this.toastController.create({
+      message: 'Has dejado de seguir a ' + this.getUserById(idFollowed)?.username,
+      duration: 1500,
+      position: 'top',
+      color: 'danger'
+    });
+
+    await toast.present();
+    
+  }
+
 }

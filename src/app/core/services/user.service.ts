@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../models/user.model';
+import { BossService } from './boss.service';
+import { CompletedBossService } from './completed-boss.service';
 
 @Injectable({
   providedIn: 'root'
@@ -83,16 +86,19 @@ export class UserService {
   private _user:BehaviorSubject<User[]> = new BehaviorSubject(this._userList);
   public user$ = this._user.asObservable();
 
-  public currentUser:User|undefined=undefined;
+  public currentUser: User | undefined
 
   id:number = this._userList.length+1;
   constructor(
-    private router:Router
+    private router:Router,
+    private bossData: BossService,
+    private completedbData: CompletedBossService,
+    private toastController: ToastController
   ) { 
   }
 
   getUserList() {
-    return this._userList;
+    return this._user;
   }
 
   getUserById(id: number) {
@@ -123,14 +129,18 @@ export class UserService {
   validateUser(user:User) {
     var userLogin = this._userList.find(u=>u.username==user.username)
 
-    if (userLogin?.password==user.password) {
-      this.currentUser = userLogin;
-      this.login()
+    if (userLogin!=null) {
+      if (userLogin?.password==user.password) {
+        this.currentUser = userLogin;
+        this.presentToastLoggedUser()
+        this.login()
+      } else {
+        this.presentToastIncorrectPassword();
+      }
     } else {
-      console.log("Usuario no encontrado")
+      this.presentToastUnregisteredUser();
     }
-
-    
+     
   }
 
   login() {
@@ -145,5 +155,46 @@ export class UserService {
   deleteUserById(id:number) {
     this._userList = this._userList.filter(u=>u.id != id); 
     this._user.next(this._userList);
+  }
+
+  progress(user: User) {
+    var numberOfBossesCompleted = this.completedbData.getCompletedBossesByUserId(user.id).length
+
+    var totalBosses = this.bossData.getBossList().length
+
+    return (numberOfBossesCompleted/totalBosses);
+  }
+
+
+  async presentToastLoggedUser() {
+    const toast = await this.toastController.create({
+      message: '¡Bienvenido, ' + this.currentUser?.username + '!',
+      duration: 1500,
+      position: 'top'
+    });
+
+    await toast.present();
+  }
+
+  async presentToastIncorrectPassword() {
+    const toast = await this.toastController.create({
+      message: 'Contraseña incorrecta',
+      duration: 1500,
+      position: 'top',
+      color: 'danger'
+    });
+
+    await toast.present();
+  }
+
+  async presentToastUnregisteredUser() {
+    const toast = await this.toastController.create({
+      message: 'Usuario no encontrado',
+      duration: 1500,
+      position: 'top',
+      color: 'danger'
+    });
+
+    await toast.present();
   }
 }

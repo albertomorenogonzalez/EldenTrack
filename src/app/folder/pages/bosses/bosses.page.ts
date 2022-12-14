@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { BossFormComponent } from 'src/app/core/components/boss-form/boss-form.component';
-import { CompletedBossFormComponent } from 'src/app/core/components/completed-boss-form/completed-boss-form.component';
 import { Boss } from 'src/app/core/models/boss.model';
-import { CompletedBoss } from 'src/app/core/models/completed-boss.model';
 import { BossService } from 'src/app/core/services/boss.service';
-import { CompletedBossService } from 'src/app/core/services/completed-boss.service';
 
 @Component({
   selector: 'app-bosses',
@@ -15,17 +12,17 @@ import { CompletedBossService } from 'src/app/core/services/completed-boss.servi
 export class BossesPage implements OnInit {
   
   constructor(
-    private data: BossService,
-    private completedBossData: CompletedBossService,
+    private bossData: BossService,
     private alert: AlertController,
     private modal: ModalController,
+    private toastController: ToastController
   ) { }
 
   ngOnInit() {
   }
 
   getBossList() {
-    return this.data.boss$;
+    return this.bossData.boss$;
   }
 
   async presentBossForm(boss?:Boss){
@@ -40,10 +37,12 @@ export class BossesPage implements OnInit {
       if(result && result.data){
         switch(result.data.mode){
           case 'New':
-            this.data.addBoss(result.data.boss);
+            this.bossData.addBoss(result.data.boss);
+            this.presentToastAdd();
             break;
           case 'Edit':
-            this.data.updateBoss(result.data.boss);
+            this.bossData.updateBoss(result.data.boss);
+            this.presentToastUpdate();
             break;
           default:
         }
@@ -52,7 +51,7 @@ export class BossesPage implements OnInit {
   }
 
   onNewBoss(){
-    this.presentBossForm();  
+    this.presentBossForm();
   }
 
   onEditBoss(boss: Boss){
@@ -75,7 +74,8 @@ export class BossesPage implements OnInit {
           text: await 'Borrar',
           role: 'confirm',
           handler: () => {
-            this.data.deleteBossById(boss.id);
+            this.bossData.deleteBossById(boss.id);
+            this.presentToastDelete();
           },
         },
       ],
@@ -90,4 +90,42 @@ export class BossesPage implements OnInit {
   onDeleteBoss(boss: Boss){
      this.onDeleteAlert(boss);
   }  
+
+  async presentToastAdd() {
+    const toast = await this.toastController.create({
+      message: 'Jefe añadido con éxito',
+      duration: 1500,
+      position: 'top',
+      color: 'success'
+    });
+
+    await toast.present();
+    
+  }
+
+  async presentToastUpdate() {
+    const toast = await this.toastController.create({
+      message: 'Datos modificados con éxito',
+      duration: 1500,
+      position: 'top',
+      color: 'success'
+    });
+
+    await toast.present();
+    
+  }
+
+  async presentToastDelete() {
+    const toast = await this.toastController.create({
+      message: 'Jefe eliminado',
+      duration: 1500,
+      position: 'top',
+      color: 'danger'
+    });
+
+    await toast.present();
+    
+  }
+
+
 }

@@ -1,4 +1,4 @@
-import { Component, forwardRef, OnDestroy, OnInit } from '@angular/core';
+import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { IonAccordionGroup, IonDatetime } from '@ionic/angular';
 import * as moment from 'moment';
@@ -20,6 +20,8 @@ export const DATE_TIME_VALUE_ACCESSOR: any = {
 })
 export class DateTimeSelectableComponent implements OnInit, ControlValueAccessor, OnDestroy {
   hasValue = false;
+
+  @Input() atributeName:string = "";
 
   constructor(
     private translateData:LocaleService
@@ -61,16 +63,13 @@ export class DateTimeSelectableComponent implements OnInit, ControlValueAccessor
 
   onDateTimeChanged(event:any, accordion:IonAccordionGroup){
     setTimeout(() => {
-    var value = this.formatDate(moment(event.detail.value));
-    if(value!=this.dateSubject.getValue())
-      {
-        this.hasValue = true;
 
-        this.dateSubject.next(value);
+      var value = this.formatDate(moment(event.detail.value));
+      
+      this.dateSubject.next(value);
 
-        accordion.value = '';
-        this.propagateChange(value);
-      }
+      accordion.value = '';
+      this.propagateChange(value);
 
     }, 100);
   }
@@ -82,10 +81,13 @@ export class DateTimeSelectableComponent implements OnInit, ControlValueAccessor
 
   onConfirm(datetime:IonDatetime, accordion:IonAccordionGroup){
     datetime.confirm();
+    accordion.value = '';
+    this.hasValue = true;
   }
 
   getLocale(): string {
     return this.translateData.locale;
   }
+
 }
 

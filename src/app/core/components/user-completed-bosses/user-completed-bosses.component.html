@@ -1,0 +1,15 @@
+ <ion-content>
+  <ion-card *ngIf="user">
+    <ion-card-content>
+      <img alt="{{user.name}} {{user.surname}}" src="{{user.profilePick}}">
+      <ion-card-subtitle>{{user.username}}</ion-card-subtitle>
+      Progreso: {{getPercentace(user)}} %
+    </ion-card-content>
+    <ion-progress-bar [value]="getProgress(user)"></ion-progress-bar>
+    <ion-card-content>
+      <ng-container *ngFor="let completedb of getCompletedBosses() | async" size="6" size-xl="3">
+        <app-completed-boss *ngIf="completedb.idUser==user?.id" [completedb]="completedb" ></app-completed-boss>
+      </ng-container>
+    </ion-card-content>
+  </ion-card>
+</ion-content> 

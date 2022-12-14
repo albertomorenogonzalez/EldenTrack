@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { Boss } from '../../models/boss.model';
 import { CompletedBoss } from '../../models/completed-boss.model';
 import { BossService, CompletedBossService, UserService } from '../../services';
@@ -30,7 +30,8 @@ export class CompletedBossFormComponent implements OnInit {
     private fb:FormBuilder,
     private modal:ModalController,
     private data:UserService,
-    private bossData: BossService
+    private bossData: BossService,
+    private toastController: ToastController
   ) { 
     this.form = this.fb.group({
       id:[null],
@@ -60,5 +61,7 @@ export class CompletedBossFormComponent implements OnInit {
   getAddedBoss() {
     return this.bossData.addedBoss
   }
+
+
 
 }

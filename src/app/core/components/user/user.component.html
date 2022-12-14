@@ -9,14 +9,18 @@
           <ion-card-subtitle>{{'user.birthdate' | translate}}: {{user.birthdate | date:'shortDate':undefined:locale.locale}}</ion-card-subtitle>
         </ion-col>
         <ion-col size="3">
-          <ion-button (click)="onFollowUser()"><ion-icon name="person-add-outline" ></ion-icon></ion-button>
+          <ion-button (click)="showCompletedBosses(user, boss)"><ion-icon name="reader-outline" ></ion-icon></ion-button>
+          <ng-container *ngIf="isFollowPage()">
+            <ion-button color="success" (click)="onFollowUser(user.id)"><ion-icon name="person-add-outline" ></ion-icon></ion-button>
           <ion-button color="danger" (click)="onDeleteClick()"><ion-icon name="trash-outline" ></ion-icon></ion-button>
+          </ng-container>
+          <ion-button *ngIf="!isFollowPage()" color="danger" (click)="onDeleteClick()"><ion-icon name="person-remove-outline" ></ion-icon></ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
   </ion-card-header>
   <ion-card-content>
-    Progreso: {{progress(user)*100}} %
+    Progreso: {{getPercentace(user)}} %
   </ion-card-content>
-  <ion-progress-bar [value]="progress(user)"></ion-progress-bar>
+  <ion-progress-bar [value]="getProgress(user)"></ion-progress-bar>
 </ion-card>

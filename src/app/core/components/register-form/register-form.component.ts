@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { User } from '../../models/user.model';
 
 @Component({
@@ -29,7 +29,8 @@ export class RegisterFormComponent implements OnInit {
 
   constructor(
     private fb:FormBuilder,
-    private modal:ModalController
+    private modal:ModalController,
+    private toastController: ToastController
   ) { 
     this.form = this.fb.group({
       id:[null],
@@ -55,12 +56,23 @@ export class RegisterFormComponent implements OnInit {
 
   onSubmit(){
     this.modal.dismiss({user: this.form.value, mode:this.mode}, 'ok');
+    this.presentToastAdd();
   }
 
   onDismiss(){
     this.modal.dismiss(null, 'cancel');
   }
 
-  
+
+  async presentToastAdd() {
+    const toast = await this.toastController.create({
+      message: 'Usuario añadido con éxito',
+      duration: 1500,
+      position: 'top',
+      color: 'success'
+    });
+
+    await toast.present();
+  }
 
 }

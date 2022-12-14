@@ -2,6 +2,12 @@
   <ion-split-pane *ngIf="(user.userConnected$ | async)" contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
+        <ion-chip>
+          <ion-avatar (click)="logOut()">
+            <ion-img src="{{getUserActive()?.profilePick}}"></ion-img>
+          </ion-avatar>
+          <ion-button fill="clear" (click)="logOut()" type="button">Cerrar Sesión</ion-button>
+        </ion-chip>
         <ion-list id="inbox-list">
           <ion-list-header>{{'Elden Track' | uppercase}}</ion-list-header>
           <ion-note>{{'home.slogan' | translate}}</ion-note>
@@ -9,7 +15,7 @@
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{'title.' + p.title | translate}}</ion-label>
+              <ion-label (click)="isNotFollowPage()">{{'title.' + p.title | translate}}</ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>

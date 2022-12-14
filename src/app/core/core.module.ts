@@ -9,7 +9,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { createTranslateLoader } from './utils/translate';
 import en from '@angular/common/locales/en';
 import es from '@angular/common/locales/es';
-import { BossComponent, RegisterFormComponent, UserComponent } from './components';
+import { BossComponent, FollowFormComponent, RegisterFormComponent, UserCompletedBossesComponent, UserComponent } from './components';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CompletedBossFormComponent } from './components/completed-boss-form/completed-boss-form.component';
 import { CompletedBossComponent } from './components/completed-boss/completed-boss.component';
@@ -43,6 +43,8 @@ registerLocaleData(en)
     CompletedBossComponent,
     CompletedBossFormComponent,
     DateTimeSelectableComponent,
+    UserCompletedBossesComponent,
+    FollowFormComponent
   ],
   imports: [
     CommonModule,
@@ -71,7 +73,9 @@ registerLocaleData(en)
     BossFormComponent,
     CompletedBossComponent,
     CompletedBossFormComponent,
-    DateTimeSelectableComponent
+    DateTimeSelectableComponent,
+    UserCompletedBossesComponent,
+    FollowFormComponent
   ],
 
   providers: [

@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { LocaleService } from './core';
+import { FollowService, LocaleService, User } from './core';
 import { UserService } from './core/services/user.service';
 @Component({
   selector: 'app-root',
@@ -20,6 +21,9 @@ export class AppComponent {
     public user:UserService,
     private translate: TranslateService,
     private localeService:LocaleService,
+    private userData: UserService,
+    private followData: FollowService,
+    private toastController: ToastController,
     private cdr:ChangeDetectorRef
   ) {
     this.translate.setDefaultLang('es');
@@ -44,5 +48,17 @@ export class AppComponent {
         break;
     }
     this.cdr.detectChanges();
+  }
+
+  isNotFollowPage() {
+    return this.followData.followPage = false;
+  }
+
+  logOut() {
+    window.location.reload();
+  }
+
+  getUserActive():User|undefined {
+    return this.userData.currentUser;
   }
 }
