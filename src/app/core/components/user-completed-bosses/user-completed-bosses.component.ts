@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { Boss, User } from '../../models';
-import { CompletedBossService, UserService } from '../../services';
+import { CompletedBossService, LocaleService, UserService } from '../../services';
 
 @Component({
   selector: 'app-user-completed-bosses',
@@ -14,10 +15,16 @@ export class UserCompletedBossesComponent implements OnInit {
 
   constructor(
     private userData: UserService,
-    private completedbData: CompletedBossService
+    private completedbData: CompletedBossService,
+    public locale:LocaleService,
+    public modal: ModalController
   ) { }
 
   ngOnInit() {}
+
+  getProgressInNumbers(user:User): string {
+    return '(' + this.userData.numberOfBossesCompleted(user) + '/' + this.userData.numberOfTotalBosses() + ')' ;
+  }
 
   getCompletedBosses() {
     return this.completedbData.completedBoss$
@@ -29,5 +36,9 @@ export class UserCompletedBossesComponent implements OnInit {
 
   getPercentace(user: User) {
     return this.getProgress(user) * 100;
+  }
+
+  onDismiss(result: any){
+    this.modal.dismiss(null, 'cancel');
   }
 }

@@ -1,7 +1,7 @@
 <ion-content>
   <form [formGroup]="form" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()">
     <ion-toolbar>
-      <ion-title>Registrarse</ion-title>
+      <ion-title>{{mode=="Edit" ? "Modificar Datos del Usuario" : "Registrarse"}}</ion-title>
     </ion-toolbar>
     <ion-item>
       <ion-label position="floating">Nombre del Usuario</ion-label>

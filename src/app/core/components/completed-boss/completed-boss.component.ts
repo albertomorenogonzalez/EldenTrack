@@ -25,6 +25,10 @@ export class CompletedBossComponent implements OnInit {
     return this.userData.getUserById(id);
   }
 
+  getCurrentUser() {
+    return this.userData.currentUser
+  }
+
   getBossById(id: number) {
     return this.bossData.getBossById(id);
   }

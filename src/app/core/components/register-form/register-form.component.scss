@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Mantinia Regular';
+  src: url('/src/assets/fonts/mantinia_regular/mantinia_regular.otf') format('otf');
+}
+*{
+  font-family: 'Mantinia Regular';
+}
+
 ion-toast.custom-toast {
   --background: #F4F4FA;
   --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);

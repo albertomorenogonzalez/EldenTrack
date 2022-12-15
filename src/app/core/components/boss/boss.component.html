@@ -5,10 +5,10 @@
   <ion-card-content>
     <ion-grid>
       <ion-row>
-        <ion-col size="3">
+        <ion-col size="12" size-md="3">
           <img alt="{{boss.name}}" src="{{boss.image}}">
         </ion-col>
-        <ion-col size="6">
+        <ion-col size="12" size-md="6">
           <ion-row>
             <ion-card-subtitle>Localización: {{boss.location}} ({{boss.area}})</ion-card-subtitle>
           </ion-row>
@@ -16,7 +16,7 @@
             <ion-card-subtitle id="bossDescription">{{boss.description}}</ion-card-subtitle>
           </ion-row>
         </ion-col>
-        <ion-col size="3">
+        <ion-col size="12" size-md="3">
           <ion-button color="success" *ngIf="!completed()" (click)="onNewCompletedBoss(boss)"><ion-icon name="add-outline"></ion-icon></ion-button>
           <ion-button *ngIf="completed()"><ion-icon name="checkmark-outline"></ion-icon></ion-button>
           <ion-button (click)="onEditClick()"><ion-icon name="create-outline"></ion-icon></ion-button>

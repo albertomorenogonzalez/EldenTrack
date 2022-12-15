@@ -12,6 +12,7 @@
     </ion-item>
     <div>
       <ion-button [disabled]="!form.valid" type="submit">{{mode=="Edit" ? "Editar" : "Añadir"}}</ion-button>
+      <ion-button color="danger" (click)="onDismiss()" type="button">Cancelar</ion-button>
     </div>
   </form>
 </ion-content>

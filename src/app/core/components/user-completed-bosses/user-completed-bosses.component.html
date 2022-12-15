@@ -1,15 +1,48 @@
  <ion-content>
+  <ion-toolbar>
+    <ion-title>Información del Usuario</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onDismiss(null)"><ion-icon name="close-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
   <ion-card *ngIf="user">
     <ion-card-content>
-      <img alt="{{user.name}} {{user.surname}}" src="{{user.profilePick}}">
-      <ion-card-subtitle>{{user.username}}</ion-card-subtitle>
-      Progreso: {{getPercentace(user)}} %
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size="3">
+            <ion-avatar>
+              <ion-img alt="{{user.name}} {{user.surname}}" src="{{user.profilePick}}"></ion-img>
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="12" size="9">
+            <ion-row size="12">
+              <ion-card-title>{{user.username}}</ion-card-title>
+            </ion-row>
+            <ion-row size="12">
+              <ion-col size="12" size-md="6">
+                <ion-card-subtitle>Nombre Completo: {{user.name}} {{user.surname}}</ion-card-subtitle>
+                <ion-card-subtitle>Fecha de Nacimiento: {{user.birthdate | date:'shortDate':undefined:locale.locale}}</ion-card-subtitle>
+              </ion-col>
+              <ion-col size="12" size-md="6">
+                <ion-card-subtitle>Progreso: {{getPercentace(user)}} %  {{getProgressInNumbers(user)}}</ion-card-subtitle>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-progress-bar [value]="getProgress(user)"></ion-progress-bar>
     </ion-card-content>
-    <ion-progress-bar [value]="getProgress(user)"></ion-progress-bar>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Jefes Completados</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <ng-container>
     <ion-card-content>
       <ng-container *ngFor="let completedb of getCompletedBosses() | async" size="6" size-xl="3">
         <app-completed-boss *ngIf="completedb.idUser==user?.id" [completedb]="completedb" ></app-completed-boss>
       </ng-container>
     </ion-card-content>
-  </ion-card>
+  </ng-container>
 </ion-content> 

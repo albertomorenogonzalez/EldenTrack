@@ -9,7 +9,12 @@
 
 <ion-content>
   <app-profile [user]="getUserActive()" (onEdit)="onEditProfile($event)"></app-profile>
-  <ion-col [ngStyle]="{'display':getItemDisplay(completedb)}" *ngFor="let completedb of getCompletedBosses() | async" size="6" size-xl="3">
-    <app-completed-boss *ngIf="completedb.idUser==getUserActive()?.id" [completedb]="completedb" (onEdit)="onEditCompletedBoss($event)" (onDelete)="onDeleteCompletedBoss($event)"></app-completed-boss>
-  </ion-col>
+  <div>
+    <ion-title>{{'Jefes Completados' | uppercase}}</ion-title> 
+  </div>
+  <ion-grid>
+    <ion-col [ngStyle]="{'display':getItemDisplay(completedb)}" *ngFor="let completedb of getCompletedBosses() | async" size="6" size-xl="3">
+      <app-completed-boss *ngIf="completedb.idUser==getUserActive()?.id" [completedb]="completedb" (onEdit)="onEditCompletedBoss($event)" (onDelete)="onDeleteCompletedBoss($event)"></app-completed-boss>
+    </ion-col>
+  </ion-grid>
 </ion-content>
