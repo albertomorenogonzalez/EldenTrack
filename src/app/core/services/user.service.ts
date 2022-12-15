@@ -43,7 +43,7 @@ export class UserService {
       email: 'adifirel13@gmail.com',
       username: 'Yametekudasaioni',
       password: 'MarDeBolivia',
-      profilePick: 'http://drive.google.com/uc?export=view&id=1xM39mOtZFzHe1LkSBoCXTsJMPVWo8s-m'
+      profilePick: 'http://drive.google.com/uc?export=view&id=1DcTaP7omPSv57wSvSKt4IkzQkVN8EqoD'
     },
     {
       id: 4,
@@ -157,12 +157,16 @@ export class UserService {
     this._user.next(this._userList);
   }
 
+  numberOfBossesCompleted(user: User):number {
+    return this.completedbData.getCompletedBossesByUserId(user.id).length
+  }
+
+  numberOfTotalBosses(): number {
+    return this.bossData.getBossList().length
+  }
+
   progress(user: User) {
-    var numberOfBossesCompleted = this.completedbData.getCompletedBossesByUserId(user.id).length
-
-    var totalBosses = this.bossData.getBossList().length
-
-    return (numberOfBossesCompleted/totalBosses);
+    return this.numberOfBossesCompleted(user)/this.numberOfTotalBosses();
   }
 
 

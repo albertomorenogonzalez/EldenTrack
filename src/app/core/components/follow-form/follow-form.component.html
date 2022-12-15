@@ -1,9 +1,10 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()">
   <ion-item>
-    <ion-img src="{{getUserById()?.profilePick}}"></ion-img>
-  </ion-item>
-  <ion-item>
+    <ion-avatar>
+      <ion-img src="{{getUserById()?.profilePick}}"></ion-img>
+    </ion-avatar>
     <ion-label>{{getUserById()?.username}}</ion-label>
+     <ion-button [disabled]="!form.valid" type="submit">Seguir</ion-button>
   </ion-item>
-  <ion-button [disabled]="!form.valid" type="submit">Seguir</ion-button>
+  
 </form>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CompletedBoss } from '../models/completed-boss.model';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,6 @@ export class CompletedBossService {
 
   id:number = this._completedBossesList.length+1;
   constructor(
-    
   ) { 
   }
 
@@ -45,6 +45,10 @@ export class CompletedBossService {
 
   getCompletedBossesByUserId(idUser: number) {
     return this._completedBossesList.filter(c=>c.idUser == idUser)
+  }
+
+  getBossCompletedByBossId(idBoss: number, idUser?: number) {
+    return this._completedBossesList.find(c=>c.idBoss==idBoss && c.idUser==idUser)
   }
 
   addCompletedBoss(completedBoss:CompletedBoss) {

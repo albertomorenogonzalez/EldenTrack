@@ -147,7 +147,7 @@ export class ProfilePage implements OnInit {
 
   async presentToastDelete() {
     const toast = await this.toastController.create({
-      message: 'Jefe Completado eliminados',
+      message: 'Jefe Completado Eliminado',
       duration: 1500,
       position: 'top',
       color: 'danger'

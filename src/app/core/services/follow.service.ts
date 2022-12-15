@@ -25,7 +25,8 @@ export class FollowService {
   public follow$ = this._follow.asObservable();
 
   id:number = this._followsList.length+1;
-  constructor() { }
+  constructor(
+  ) { }
 
   public idUser: number | undefined;
   public idFollowed!: number;
@@ -43,13 +44,17 @@ export class FollowService {
     return this._followsList.find(u=>u.id==id);
   }
 
+  getFollowByIdFollowed(idFollowed?: number, idUser?: number) {
+    return this._followsList.find(f=>f.idFollowed==idFollowed && f.idUser==idUser)
+  }
+
   follow(follow:Follow) {
     follow.id = this.id++;
     this._followsList.push(follow);
     this._follow.next(this._followsList);
   }
 
-  unfollowById(id:number) {
+  unfollowById(id?:number) {
     this._followsList = this._followsList.filter(f=>f.idFollowed != id); 
     this._follow.next(this._followsList);
   }

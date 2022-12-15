@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
+import { UserService } from 'src/app/core';
 import { BossFormComponent } from 'src/app/core/components/boss-form/boss-form.component';
 import { Boss } from 'src/app/core/models/boss.model';
 import { BossService } from 'src/app/core/services/boss.service';
@@ -13,6 +14,7 @@ export class BossesPage implements OnInit {
   
   constructor(
     private bossData: BossService,
+    private userData: UserService,
     private alert: AlertController,
     private modal: ModalController,
     private toastController: ToastController
@@ -23,6 +25,10 @@ export class BossesPage implements OnInit {
 
   getBossList() {
     return this.bossData.boss$;
+  }
+
+  getCurrentUser() {
+    return this.userData.currentUser;
   }
 
   async presentBossForm(boss?:Boss){
@@ -51,11 +57,21 @@ export class BossesPage implements OnInit {
   }
 
   onNewBoss(){
-    this.presentBossForm();
+    if (this.getCurrentUser()?.admin) {
+      this.presentBossForm();
+    } else {
+      this.onUserNotAdmin();
+    }
+    
   }
 
   onEditBoss(boss: Boss){
-    this.presentBossForm(boss);
+    if (this.getCurrentUser()?.admin) {
+      this.presentBossForm(boss);
+    } else {
+      this.onUserNotAdmin();
+    }
+    
   }
 
   async onDeleteAlert(boss: Boss){
@@ -88,8 +104,35 @@ export class BossesPage implements OnInit {
 
 
   onDeleteBoss(boss: Boss){
-     this.onDeleteAlert(boss);
+    if (this.getCurrentUser()?.admin) {
+      this.onDeleteAlert(boss);
+    } else {
+      this.onUserNotAdmin();
+    }
+     
   }  
+
+
+  async onUserNotAdmin(){
+    const alert = await this.alert.create({
+      header: 'Permiso Denegado',
+      message: await 'Necesita ser un administrador para realizar esta acción',
+      buttons: [
+        {
+          text: await 'Cerrar',
+          role: 'close',
+          handler: () => {
+           
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+  }
+
 
   async presentToastAdd() {
     const toast = await this.toastController.create({

@@ -1,5 +1,8 @@
 <ion-content>
   <form [formGroup]="form" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()">
+    <ion-toolbar>
+      <ion-title> Completado - {{getAddedBoss()?.name}}</ion-title>
+    </ion-toolbar>
     <ion-img src="{{getAddedBoss()?.image}}"></ion-img>
     <app-date-time-selectable [atributeName]="'startDate'" formControlName="startDate"></app-date-time-selectable>
     <app-date-time-selectable [atributeName]="'finishDate'" formControlName="finishDate"></app-date-time-selectable>

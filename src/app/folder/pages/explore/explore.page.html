@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-row>
-    <ion-col [ngStyle]="{'display':getItemDisplay(user.id)}" *ngFor="let user of getUserList() | async" size="6" size-xl="3">
+    <ion-col [ngStyle]="{'display':getItemDisplay(user.id)}" *ngFor="let user of getUserList() | async" size="12" size-md="6" size-xl="3">
       <app-user [user]="user" (onDelete)="onDeleteUser($event)"></app-user>
     </ion-col>
   </ion-row>

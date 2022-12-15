@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
-import { FollowService, UserService } from 'src/app/core';
+import { Follow, FollowService, UserService } from 'src/app/core';
 import { User } from 'src/app/core/models/user.model';
 
 @Component({
@@ -12,6 +12,8 @@ export class ExplorePage implements OnInit {
 
   constructor(
     private userData: UserService,
+    private followData: FollowService,
+    private toastController: ToastController,
     private alert: AlertController
   ) { }
 
@@ -52,7 +54,12 @@ export class ExplorePage implements OnInit {
   
 
   onDeleteUser(user: User){
-     this.onDeleteAlert(user);
+    if (this.getCurrentUser()?.admin) {
+      this.onDeleteAlert(user);
+    } else {
+      this.onUserNotAdmin();
+    }
+     
   } 
   
   getCurrentUser(){
@@ -69,6 +76,26 @@ export class ExplorePage implements OnInit {
     }
 
     return display;
+  }
+
+  async onUserNotAdmin(){
+    const alert = await this.alert.create({
+      header: 'Permiso Denegado',
+      message: await 'Necesita ser un administrador para realizar esta acción',
+      buttons: [
+        {
+          text: await 'Cerrar',
+          role: 'close',
+          handler: () => {
+           
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
   }
 
 }

@@ -9,13 +9,18 @@
           <img alt="{{boss.name}}" src="{{boss.image}}">
         </ion-col>
         <ion-col size="6">
-          <ion-card-subtitle>Localización: {{boss.location}} ({{boss.area}})</ion-card-subtitle>
-          <ion-card-subtitle>{{boss.description}}</ion-card-subtitle>
+          <ion-row>
+            <ion-card-subtitle>Localización: {{boss.location}} ({{boss.area}})</ion-card-subtitle>
+          </ion-row>
+          <ion-row>
+            <ion-card-subtitle id="bossDescription">{{boss.description}}</ion-card-subtitle>
+          </ion-row>
         </ion-col>
         <ion-col size="3">
-          <ion-button color="success" (click)="onNewCompletedBoss(boss)"><ion-icon name="add-outline"></ion-icon></ion-button>
+          <ion-button color="success" *ngIf="!completed()" (click)="onNewCompletedBoss(boss)"><ion-icon name="add-outline"></ion-icon></ion-button>
+          <ion-button *ngIf="completed()"><ion-icon name="checkmark-outline"></ion-icon></ion-button>
           <ion-button (click)="onEditClick()"><ion-icon name="create-outline"></ion-icon></ion-button>
-          <ion-button color="danger" (click)="onDeleteClick()"><ion-icon name="trash-outline" ></ion-icon></ion-button>
+          <ion-button color="danger" (click)="onDeleteClick()"><ion-icon name="trash-outline"></ion-icon></ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

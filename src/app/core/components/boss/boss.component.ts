@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Boss } from '../../models/boss.model';
 import { CompletedBoss } from '../../models/completed-boss.model';
-import { BossService } from '../../services';
+import { BossService, UserService } from '../../services';
 import { CompletedBossService } from '../../services/completed-boss.service';
 import { LocaleService } from '../../services/localeService';
 import { CompletedBossFormComponent } from '../completed-boss-form/completed-boss-form.component';
@@ -22,7 +22,8 @@ export class BossComponent implements OnInit {
     private modal: ModalController,
     private completedBossData: CompletedBossService,
     public locale:LocaleService,
-    private data: BossService,
+    private userData: UserService,
+    private bossData: BossService,
     private toastController: ToastController
   ) { }
 
@@ -49,9 +50,17 @@ export class BossComponent implements OnInit {
     });
   }
 
+  getCurrentUser() {
+    return this.userData.currentUser
+  }
+
+  completed() {
+    return this.completedBossData.getBossCompletedByBossId(this.boss.id, this.getCurrentUser()?.id)
+  }
+
   onNewCompletedBoss(boss: Boss){
     this.presentCompletedBossForm();  
-    this.data.addedBoss = boss;
+    this.bossData.addedBoss = boss;
   }
 
   onEditClick(){
@@ -64,7 +73,7 @@ export class BossComponent implements OnInit {
 
   async presentToastAdd() {
     const toast = await this.toastController.create({
-      message: 'Jefe Completado ¡Enhorabuena!',
+      message: 'Jefe Completado ¡Enhorabuena! Revisa tu perfil para verlo',
       duration: 1500,
       position: 'top',
       color: 'success'

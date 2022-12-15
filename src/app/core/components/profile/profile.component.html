@@ -1,14 +1,20 @@
 <ion-card *ngIf="user">
   <ion-card-header>
-    <img alt="{{user.name}} {{user.surname}}" src="{{user.profilePick}}">
+    
     <ion-grid>
       <ion-row>
-        <ion-col size="9">
-          <ion-card-title>{{user.name}} {{user.surname}}</ion-card-title>
-          <ion-card-subtitle>{{user.username}}</ion-card-subtitle>
-          <ion-card-subtitle>{{'user.birthdate' | translate}}: {{user.birthdate | date:'shortDate':undefined:locale.locale}}</ion-card-subtitle>
-        </ion-col>
         <ion-col size="3">
+          <ion-avatar>
+            <ion-img alt="{{user.name}} {{user.surname}}" src="{{user.profilePick}}"></ion-img>
+          </ion-avatar>
+        </ion-col>
+        <ion-col size="7">
+          <ion-card-title>{{user.username}}</ion-card-title>
+          <ion-card-subtitle>Nombre Completo: {{user.name}} {{user.surname}}</ion-card-subtitle>
+          <ion-card-subtitle>{{'user.birthdate' | translate}}: {{user.birthdate | date:'shortDate':undefined:locale.locale}}</ion-card-subtitle>
+          <ion-card-subtitle>Email: {{user.email}}</ion-card-subtitle>
+        </ion-col>
+        <ion-col size="2">
           <ion-button (click)="onEditClick()"><ion-icon name="create-outline" ></ion-icon></ion-button>
         </ion-col>
       </ion-row>

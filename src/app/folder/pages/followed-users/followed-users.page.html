@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-row>
-      <ion-col [ngStyle]="{'display':getItemDisplay(follow.idFollowed)}" *ngFor="let follow of getFollowList() | async" size="6" size-xl="3">
+      <ion-col [ngStyle]="{'display':getItemDisplay(follow)}" *ngFor="let follow of getFollowList() | async" size="12" size-md="6" size-xl="3">
         <app-user *ngIf="follow.idUser==getCurrentUser()?.id" [user]="getUserById(follow.idFollowed)" (onDelete)="unfollow(follow)"></app-user>
       </ion-col>
     

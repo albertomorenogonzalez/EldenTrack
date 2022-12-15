@@ -26,7 +26,7 @@ export class FollowedUsersPage implements OnInit {
   }
 
   unfollow(follow: Follow) {
-    this.onDeleteAlert(follow);
+    this.onUnfollowAlert(follow);
   }
 
   getFollowList() {
@@ -45,10 +45,10 @@ export class FollowedUsersPage implements OnInit {
     return this.userData.getUserById(idFollowed);
   }
 
-  getItemDisplay(idFollowed: number) {
+  getItemDisplay(follow: Follow) {
     var display = 'inline';
 
-    if (this.getUserById(idFollowed)==null) {
+    if (this.getUserById(follow.idFollowed)==null || follow.idUser!=this.getCurrentUser()?.id) {
       display = 'none';
     } else {
       display = 'inline';
@@ -57,7 +57,7 @@ export class FollowedUsersPage implements OnInit {
     return display;
   }
 
-  async onDeleteAlert(follow: Follow){
+  async onUnfollowAlert(follow: Follow){
     const alert = await this.alert.create({
       header: await 'Atención',
       message: await '¿Está seguro de que quiere dejar de seguir a este usuario?',
@@ -70,7 +70,7 @@ export class FollowedUsersPage implements OnInit {
           },
         },
         {
-          text: await 'Borrar',
+          text: await 'Dejar de Seguir',
           role: 'confirm',
           handler: () => {
             this.followData.unfollowById(follow.idFollowed);
