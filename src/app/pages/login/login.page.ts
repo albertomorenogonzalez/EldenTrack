@@ -24,8 +24,8 @@ export class LoginPage implements OnInit, OnDestroy {
     private fb:FormBuilder
   ) { 
     this.form = this.fb.group({
-      username:["Gyobu Oniwa", [Validators.required]],
-      password:["Ashina3", [Validators.required]],
+      username:["", [Validators.required]],
+      password:["", [Validators.required]],
     });
     this.subscr = this.userSvc.userConnected$.subscribe(connected=>{
       if(connected)
