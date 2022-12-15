@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { lastValueFrom } from 'rxjs';
 import { Follow, FollowService, UserService } from 'src/app/core';
 import { User } from 'src/app/core/models/user.model';
 
@@ -12,9 +14,8 @@ export class ExplorePage implements OnInit {
 
   constructor(
     private userData: UserService,
-    private followData: FollowService,
-    private toastController: ToastController,
-    private alert: AlertController
+    private alert: AlertController,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {
@@ -26,18 +27,18 @@ export class ExplorePage implements OnInit {
 
   async onDeleteAlert(user: User){
     const alert = await this.alert.create({
-      header: await 'Atención',
-      message: await '¿Está seguro de que quiere borrar este usuario?',
+      header: await lastValueFrom(this.translate.get('alerts.warning')),
+      message: await lastValueFrom(this.translate.get('alerts.deleteUser')),
       buttons: [
         {
-          text: await 'Cancelar',
+          text: await lastValueFrom(this.translate.get('home.cancel')),
           role: 'cancel',
           handler: () => {
             console.log("Operacion cancelada");
           },
         },
         {
-          text: await 'Borrar',
+          text: await lastValueFrom(this.translate.get('home.delete')),
           role: 'confirm',
           handler: () => {
             this.userData.deleteUserById(user.id);
@@ -80,8 +81,8 @@ export class ExplorePage implements OnInit {
 
   async onUserNotAdmin(){
     const alert = await this.alert.create({
-      header: 'Permiso Denegado',
-      message: await 'Necesita ser un administrador para realizar esta acción',
+      header: await lastValueFrom(this.translate.get('alerts.accessDenied')),
+      message: await lastValueFrom(this.translate.get('alerts.accessDeniedMessage')),
       buttons: [
         {
           text: await 'Cerrar',

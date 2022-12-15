@@ -1,15 +1,15 @@
 <ion-content>
   <form [formGroup]="form" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()">
     <ion-toolbar>
-      <ion-title>{{mode=="Edit" ? "Modificar Datos del Usuario" : "Registrarse"}}</ion-title>
+      <ion-title>{{mode=="Edit" ? ['user.updateInformation' | translate] : ['title.register' | translate]}}</ion-title>
     </ion-toolbar>
     <ion-item>
-      <ion-label position="floating">Nombre del Usuario</ion-label>
-      <ion-input placeholder="Nombre" formControlName="name" type="text"></ion-input>
+      <ion-label position="floating">{{'user.userName' | translate}}</ion-label>
+      <ion-input placeholder="{{'user.placeholderName' | translate}}" formControlName="name" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Apellidos del Usuario</ion-label>
-      <ion-input placeholder="Apellidos" formControlName="surname" type="text"></ion-input>
+      <ion-label position="floating">{{'user.userSurname' | translate}}</ion-label>
+      <ion-input placeholder="{{'user.placeHolderSurname' | translate}}" formControlName="surname" type="text"></ion-input>
     </ion-item>
     <app-date-time-selectable [atributeName]="'birthdate'" formControlName="birthdate"></app-date-time-selectable>
     <ion-item>
@@ -17,20 +17,20 @@
       <ion-input placeholder="Email" formControlName="email" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Nombre de Usuario</ion-label>
-      <ion-input placeholder="Usuario" formControlName="username" type="text"></ion-input>
+      <ion-label position="floating">{{'user.userUsername' | translate}}</ion-label>
+      <ion-input placeholder="{{'login.user' | translate}}" formControlName="username" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input placeholder="Contraseña" formControlName="password" type="password"></ion-input>
+      <ion-label position="floating">{{'login.password' | translate}}</ion-label>
+      <ion-input placeholder="{{'login.password' | translate}}" formControlName="password" type="password"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Foto de Perfil</ion-label>
-      <ion-input placeholder="Foto de Perfil" formControlName="profilePick" type="text"></ion-input>
+      <ion-label position="floating">{{'user.profilePick' | translate}}</ion-label>
+      <ion-input placeholder="{{'user.profilePick' | translate}}" formControlName="profilePick" type="text"></ion-input>
     </ion-item>
     <div>
-      <ion-button [disabled]="!form.valid" type="submit">{{mode=="Edit" ? "Editar" : "Registrarse"}}</ion-button>
-      <ion-button color="danger" (click)="onDismiss()" type="button">Cancelar</ion-button>
+      <ion-button [disabled]="!form.valid" type="submit">{{mode=="Edit" ? ['home.edit' | translate] : ['title.register' | translate]}}</ion-button>
+      <ion-button color="danger" (click)="onDismiss()" type="button">{{'home.cancel' | translate}}</ion-button>
     </div>
   </form>
 </ion-content>

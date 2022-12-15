@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { lastValueFrom } from 'rxjs';
 import { UserService } from 'src/app/core';
 import { BossFormComponent } from 'src/app/core/components/boss-form/boss-form.component';
 import { Boss } from 'src/app/core/models/boss.model';
@@ -17,7 +19,8 @@ export class BossesPage implements OnInit {
     private userData: UserService,
     private alert: AlertController,
     private modal: ModalController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {
@@ -76,18 +79,18 @@ export class BossesPage implements OnInit {
 
   async onDeleteAlert(boss: Boss){
     const alert = await this.alert.create({
-      header: await 'Atención',
-      message: await '¿Está seguro de que quiere borrar este jefe?',
+      header: await lastValueFrom(this.translate.get('alerts.warning')),
+      message: await lastValueFrom(this.translate.get('alerts.deleteBoss')),
       buttons: [
         {
-          text: await 'Cancelar',
+          text: await lastValueFrom(this.translate.get('home.cancel')),
           role: 'cancel',
           handler: () => {
             console.log("Operacion cancelada");
           },
         },
         {
-          text: await 'Borrar',
+          text: await await lastValueFrom(this.translate.get('home.delete')),
           role: 'confirm',
           handler: () => {
             this.bossData.deleteBossById(boss.id);
@@ -115,11 +118,11 @@ export class BossesPage implements OnInit {
 
   async onUserNotAdmin(){
     const alert = await this.alert.create({
-      header: 'Permiso Denegado',
-      message: await 'Necesita ser un administrador para realizar esta acción',
+      header: await lastValueFrom(this.translate.get('alerts.accessDenied')),
+      message: await lastValueFrom(this.translate.get('alerts.accessDeniedMessage')),
       buttons: [
         {
-          text: await 'Cerrar',
+          text: await lastValueFrom(this.translate.get('home.close')),
           role: 'close',
           handler: () => {
            
@@ -136,7 +139,7 @@ export class BossesPage implements OnInit {
 
   async presentToastAdd() {
     const toast = await this.toastController.create({
-      message: 'Jefe añadido con éxito',
+      message: await lastValueFrom(this.translate.get('toasts.addBoss')),
       duration: 1500,
       position: 'top',
       color: 'success'
@@ -148,7 +151,7 @@ export class BossesPage implements OnInit {
 
   async presentToastUpdate() {
     const toast = await this.toastController.create({
-      message: 'Datos modificados con éxito',
+      message: await lastValueFrom(this.translate.get('toasts.update')),
       duration: 1500,
       position: 'top',
       color: 'success'
@@ -160,7 +163,7 @@ export class BossesPage implements OnInit {
 
   async presentToastDelete() {
     const toast = await this.toastController.create({
-      message: 'Jefe eliminado',
+      message: await lastValueFrom(this.translate.get('toasts.deleteBoss')),
       duration: 1500,
       position: 'top',
       color: 'danger'

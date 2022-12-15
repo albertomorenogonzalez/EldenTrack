@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ModalController, ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { lastValueFrom } from 'rxjs';
 import { User } from '../../models/user.model';
 
 @Component({
@@ -30,7 +32,8 @@ export class RegisterFormComponent implements OnInit {
   constructor(
     private fb:FormBuilder,
     private modal:ModalController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private translate: TranslateService
   ) { 
     this.form = this.fb.group({
       id:[null],
@@ -41,7 +44,7 @@ export class RegisterFormComponent implements OnInit {
       email:["", [Validators.required]],
       username:["", [Validators.required]],
       password:["", [Validators.required]],
-      profilePick:["", [Validators.required]]
+      profilePick:['https://ionicframework.com/docs/img/demos/avatar.svg', [Validators.required]]
     });
   }
 
@@ -66,7 +69,7 @@ export class RegisterFormComponent implements OnInit {
 
   async presentToastAdd() {
     const toast = await this.toastController.create({
-      message: 'Usuario añadido con éxito',
+      message: await lastValueFrom(this.translate.get('toasts.userAdded')),
       duration: 1500,
       position: 'top',
       color: 'success'

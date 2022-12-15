@@ -1,20 +1,105 @@
 {
+  "login": {
+    "title":"Iniciar Sesión",
+    "user":"Usuario",
+    "password":"Contraseña"
+  },
+
   "title": {
-    "register":"Registro de un Nuevo Usuario",
+    "register":"Registrarse",
     "home":"Inicio",
     "profile":"Perfil",
     "bosses":"Jefes",
     "social":"Social",
-    "about":"Sobre mí"
+    "about":"Sobre mí",
+    "followedUsers":"Usuarios Seguidos",
+    "exploreUsers":"Explorar Usuarios"
   },
 
   "home": {
     "slogan":"Álzate, Sinluz",
     "language":"Idioma: Español",
-    "action":"Pulse para cambiar de idioma"
+    "appDescription":"En Elden Track podrás registrar los jefes que hayas completado en Elden Ring.",
+    "buttonMessage":"Completa tu Lista",
+    "logOut":"Cerrar Sesión",
+    "edit":"Editar",
+    "cancel":"Cancelar",
+    "confirm":"Confirmar",
+    "add":"Añadir",
+    "follow": "Seguir",
+    "unfollow": "Dejar de Seguir",
+    "delete": "Borrar",
+    "close": "Cerrar"
   },
 
   "user": {
-    "birthdate":"Fecha de Nacimiento"
+    "userInformation":"Información del Usuario",
+    "fullName": "Nombre Completo",
+    "birthdate":"Fecha de Nacimiento",
+    "completedBosses":"Jefes Completados",
+    "updateInformation":"Modificar Datos del Usuario",
+    "userName": "Nombre del Usuario",
+    "placeholderName": "Nombre",
+    "userSurname": "Apellidos del Usuario",
+    "placeHolderSurname": "Apellidos",
+    "userUsername":"Nombre de Usuario",
+    "profilePick":"Foto de Perfil",
+    "progress": "Progreso"
+  },
+
+  "boss": {
+    "addButton":"Añadir Nuevo Jefe",
+    "location":"Localización",
+    "updateInformation": "Editar Datos del Jefe",
+    "addInformation": "Añadir Jefe",
+    "bossName": "Nombre del Jefe",
+    "bossArea": "Área del Jefe",
+    "placeHolderArea": "Área",
+    "bossLocation": "Localización Concreta del Jefe",
+    "placeHolderLocation": "Localización",
+    "bossDescription": "Descripción",
+    "bossLifePoints": "Número de Puntos De Vida",
+    "placeHolderLifePoints":"Puntos de Vida",
+    "bossImage": "Imagen del Jefe",
+    "placeHolderImage": "Imagen"
+  },
+
+  "completedBoss": {
+    "completed": "Completado",
+    "startDate": "Fecha del Primer Intento",
+    "finishDate": "Completado el",
+    "notes": "Notas",
+    "placeHolderNotes": "Inserte Alguna Apreciación"
+  },
+
+  "about": {
+    "author":"Autor",
+    "subject":"Asignatura: Acceso a Datos / Hora de Libre Configuración",
+    "course":"Curso: 2º Desarrollo de Aplicaciones Multiplataforma (DAM)",
+    "highSchool":"Centro: CPIFP Málaga Tech Park (desglose IES Campanillas)"
+  },
+
+  "toasts": {
+    "completedBoss":"Jefe Completado ¡Enhorabuena! Revisa tu perfil para verlo",
+    "startedFollow":"¡Has Empezado a Seguir a ",
+    "userAdded":"Usuario Añadido con Éxito",
+    "unfollow":"Has Dejado de Seguir a ",
+    "logged": "¡Bienvenido, ",
+    "incorrectPassword": "Contraseña Incorrecta",
+    "userNotFound":"Usuario no Encontrado",
+    "addBoss":"Jefe Añadido con Éxito",
+    "update":"Datos Modificados con Éxito",
+    "deleteBoss":"Jefe eliminado",
+    "deleteCompletedBoss":"Jefe Completado Eliminado"
+  },
+
+  "alerts": {
+    "warning":"Atención",
+    "unfollow":"¿Está seguro de que quiere dejar de seguir a este usuario?",
+    "deleteBoss":"¿Está seguro de que quiere borrar este jefe?",
+    "accessDenied":"Permiso Denegado",
+    "accessDeniedMessage":"Necesita ser un administrador para realizar esta acción",
+    "deleteUser":"¿Está seguro de que quiere eliminar este usuario?",
+    "deleteCompletedBoss":"¿Está seguro de que quiere borrar este jefe completado?"
   }
 }

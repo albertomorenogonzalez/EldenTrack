@@ -17,7 +17,7 @@
     </ion-grid>
   </ion-card-header>
   <ion-card-content>
-    Progreso: {{getPercentace(user)}} %  {{getProgressInNumbers(user)}}
+    {{'user.progress' | translate}}: {{getPercentace(user)}} %  {{getProgressInNumbers(user)}}
   </ion-card-content>
   <ion-progress-bar [value]="getProgress(user)"></ion-progress-bar>
 </ion-card>

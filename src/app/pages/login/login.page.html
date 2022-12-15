@@ -8,26 +8,26 @@
         <ion-col id="loginBox">
           <ion-card>
             <ion-card-header>
-              <ion-card-title>Inicio de sesión</ion-card-title>
+              <ion-card-title>{{'login.title' | translate}}</ion-card-title>
             </ion-card-header>
             <ion-card-content>
               <form [formGroup]="form" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()">
                 <ion-item>
-                  <ion-label position="floating">Usuario</ion-label>
+                  <ion-label position="floating">{{'login.user' | translate}}</ion-label>
                   <ion-input placeholder="Usuario" formControlName="username" type="text"></ion-input>
                 </ion-item>
                 <ion-item>
-                  <ion-label position="floating">Contraseña</ion-label>
+                  <ion-label position="floating">{{'login.password' | translate}}</ion-label>
                   <ion-input placeholder="Contraseña" formControlName="password" type="password"></ion-input>
                 </ion-item>
                 <div class="login-submit-button">
-                  <ion-button [disabled]="!form.valid" type="submit">Iniciar sesión</ion-button>
+                  <ion-button [disabled]="!form.valid" type="submit">{{'login.title' | translate}}</ion-button>
                 </div>
               </form>
             </ion-card-content>
 
             <div id="register-button">
-              <ion-button (click)="onNewUser()" type="button">Registrarse</ion-button>
+              <ion-button (click)="onNewUser()" type="button">{{'title.register' | translate}}</ion-button>
             </div>
           </ion-card>
           

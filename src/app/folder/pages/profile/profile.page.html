@@ -10,7 +10,7 @@
 <ion-content>
   <app-profile [user]="getUserActive()" (onEdit)="onEditProfile($event)"></app-profile>
   <div>
-    <ion-title>{{'Jefes Completados' | uppercase}}</ion-title> 
+    <ion-title>{{'user.completedBosses' | translate | uppercase}}</ion-title> 
   </div>
   <ion-grid>
     <ion-col [ngStyle]="{'display':getItemDisplay(completedb)}" *ngFor="let completedb of getCompletedBosses() | async" size="6" size-xl="3">

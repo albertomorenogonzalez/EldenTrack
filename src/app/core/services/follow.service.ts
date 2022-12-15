@@ -19,6 +19,71 @@ export class FollowService {
       idUser: 1,
       idFollowed: 3
     },
+    {
+      id: 3,
+      idUser: 1,
+      idFollowed: 4
+    },
+    {
+      id: 4,
+      idUser: 1,
+      idFollowed: 5
+    },
+    {
+      id: 5,
+      idUser: 1,
+      idFollowed: 6
+    },
+    {
+      id: 6,
+      idUser: 2,
+      idFollowed: 1
+    },
+    {
+      id: 7,
+      idUser: 2,
+      idFollowed: 3
+    },
+    {
+      id: 8,
+      idUser: 3,
+      idFollowed: 1
+    },
+    {
+      id: 9,
+      idUser: 3,
+      idFollowed: 2
+    },
+    {
+      id: 10,
+      idUser: 4,
+      idFollowed: 1
+    },
+    {
+      id: 11,
+      idUser: 4,
+      idFollowed: 6
+    },
+    {
+      id: 12,
+      idUser: 5,
+      idFollowed: 1
+    },
+    {
+      id: 13,
+      idUser: 5,
+      idFollowed: 6
+    },
+    {
+      id: 14,
+      idUser: 6,
+      idFollowed: 4
+    },
+    {
+      id: 15,
+      idUser: 6,
+      idFollowed: 5
+    },
   ]
 
   private _follow:BehaviorSubject<Follow[]> = new BehaviorSubject(this._followsList);

@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { lastValueFrom } from 'rxjs';
 import { FollowFormComponent } from '..';
 import { Boss, Follow } from '../../models';
 import { User } from '../../models/user.model';
@@ -26,7 +28,8 @@ export class UserComponent implements OnInit {
     public locale:LocaleService,
     private toastController: ToastController,
     private modal:ModalController,
-    private alert:AlertController
+    private alert:AlertController,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {}
@@ -51,8 +54,8 @@ export class UserComponent implements OnInit {
     return this.followData.getFollowByIdFollowed(idFollowed, this.getCurrentUser()?.id);
   }
 
-  getPercentace(user: User): number {
-    return this.getProgress(user) * 100;
+  getPercentace(user: User): string {
+    return (this.getProgress(user) * 100).toFixed(2);
   }
 
   getProgressInNumbers(user:User): string {
@@ -86,12 +89,10 @@ export class UserComponent implements OnInit {
   }
 
   onUnfollowUser(idFollowed: number) {
-    this.onUnfollowAlert(this.followData.getFollowByIdFollowed(idFollowed));
+    this.onUnfollowAlert(this.followData.getFollowByIdFollowed(idFollowed, this.getCurrentUser()?.id));
   }
 
 
-
-  
   showCompletedBosses(user: User, boss: Boss) {
     this.userInformation(user, boss);
   }
@@ -110,18 +111,18 @@ export class UserComponent implements OnInit {
 
   async onUnfollowAlert(follow?: Follow){
     const alert = await this.alert.create({
-      header: await 'Atención',
-      message: await '¿Está seguro de que quiere dejar de seguir a este usuario?',
+      header: await lastValueFrom(this.translate.get('alerts.warning')),
+      message: await lastValueFrom(this.translate.get('alerts.unfollow')),
       buttons: [
         {
-          text: await 'Cancelar',
+          text: await lastValueFrom(this.translate.get('home.cancel')),
           role: 'cancel',
           handler: () => {
             console.log("Operacion cancelada");
           },
         },
         {
-          text: await 'Dejar de Seguir',
+          text: await lastValueFrom(this.translate.get('home.unfollow')),
           role: 'confirm',
           handler: () => {
             this.followData.unfollowById(follow?.idFollowed);
@@ -139,7 +140,7 @@ export class UserComponent implements OnInit {
 
   async presentToastUnfollow() {
     const toast = await this.toastController.create({
-      message: 'Has dejado de seguir a ' + this.user?.username,
+      message: await lastValueFrom(this.translate.get('toasts.unfollow')) + this.user?.username,
       duration: 1500,
       position: 'top',
       color: 'danger'

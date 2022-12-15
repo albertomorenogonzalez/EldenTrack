@@ -6,7 +6,7 @@
           <ion-avatar (click)="logOut()">
             <ion-img src="{{getUserActive()?.profilePick}}"></ion-img>
           </ion-avatar>
-          <ion-button fill="clear" (click)="logOut()" type="button">Cerrar Sesión</ion-button>
+          <ion-button fill="clear" (click)="logOut()" type="button">{{'home.logOut' | translate}}</ion-button>
         </ion-chip>
         <ion-list id="inbox-list">
           <ion-list-header>{{'Elden Track' | uppercase}}</ion-list-header>

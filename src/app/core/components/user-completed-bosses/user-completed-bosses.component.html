@@ -1,6 +1,6 @@
  <ion-content>
   <ion-toolbar>
-    <ion-title>Información del Usuario</ion-title>
+    <ion-title>{{'user.userInformation' | translate}}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="onDismiss(null)"><ion-icon name="close-outline"></ion-icon></ion-button>
     </ion-buttons>
@@ -20,11 +20,11 @@
             </ion-row>
             <ion-row size="12">
               <ion-col size="12" size-md="6">
-                <ion-card-subtitle>Nombre Completo: {{user.name}} {{user.surname}}</ion-card-subtitle>
-                <ion-card-subtitle>Fecha de Nacimiento: {{user.birthdate | date:'shortDate':undefined:locale.locale}}</ion-card-subtitle>
+                <ion-card-subtitle>{{'user.fullName' | translate}}: {{user.name}} {{user.surname}}</ion-card-subtitle>
+                <ion-card-subtitle>{{'user.birthdate' | translate}}: {{user.birthdate | date:'shortDate':undefined:locale.locale}}</ion-card-subtitle>
               </ion-col>
               <ion-col size="12" size-md="6">
-                <ion-card-subtitle>Progreso: {{getPercentace(user)}} %  {{getProgressInNumbers(user)}}</ion-card-subtitle>
+                <ion-card-subtitle>{{'user.progress' | translate}}: {{getPercentace(user)}} %  {{getProgressInNumbers(user)}}</ion-card-subtitle>
               </ion-col>
             </ion-row>
           </ion-col>
@@ -35,7 +35,7 @@
   </ion-card>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Jefes Completados</ion-card-title>
+      <ion-card-title>{{'user.completedBosses' | translate}}</ion-card-title>
     </ion-card-header>
   </ion-card>
   <ng-container>

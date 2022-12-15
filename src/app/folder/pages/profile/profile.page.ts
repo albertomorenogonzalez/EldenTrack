@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { lastValueFrom } from 'rxjs';
 import { BossService, RegisterFormComponent } from 'src/app/core';
 import { CompletedBossFormComponent } from 'src/app/core/components/completed-boss-form/completed-boss-form.component';
 import { CompletedBoss } from 'src/app/core/models/completed-boss.model';
@@ -20,7 +22,8 @@ export class ProfilePage implements OnInit {
     private completedBossData: CompletedBossService,
     private alert: AlertController,
     private modal: ModalController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private translate: TranslateService
   ) { 
 
   }
@@ -89,18 +92,18 @@ export class ProfilePage implements OnInit {
 
   async onDeleteAlert(completedb: CompletedBoss){
     const alert = await this.alert.create({
-      header: await 'Atención',
-      message: await '¿Está seguro de que quiere borrar este jefe completado?',
+      header: await lastValueFrom(this.translate.get('alerts.warning')),
+      message: await lastValueFrom(this.translate.get('alerts.deleteCompletedBoss')),
       buttons: [
         {
-          text: await 'Cancelar',
+          text: await lastValueFrom(this.translate.get('home.cancel')),
           role: 'cancel',
           handler: () => {
             console.log("Operacion cancelada");
           },
         },
         {
-          text: await 'Borrar',
+          text: await lastValueFrom(this.translate.get('home.delete')),
           role: 'confirm',
           handler: () => {
             this.completedBossData.deleteCompletedBossById(completedb.id);
@@ -135,7 +138,7 @@ export class ProfilePage implements OnInit {
 
   async presentToastUpdate() {
     const toast = await this.toastController.create({
-      message: 'Datos modificados con éxito',
+      message: await lastValueFrom(this.translate.get('toasts.update')),
       duration: 1500,
       position: 'top',
       color: 'success'
@@ -147,7 +150,7 @@ export class ProfilePage implements OnInit {
 
   async presentToastDelete() {
     const toast = await this.toastController.create({
-      message: 'Jefe Completado Eliminado',
+      message: await lastValueFrom(this.translate.get('toasts.deleteCompletedBoss')),
       duration: 1500,
       position: 'top',
       color: 'danger'

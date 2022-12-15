@@ -9,9 +9,9 @@
           <ion-img src="{{getBossById(completedb.idBoss)?.image}}"></ion-img>
         </ion-col>
         <ion-col size="12" size-md="7">
-          <ion-card-subtitle>Fecha del Primer Intento: {{completedb.startDate | date:'shortDate':undefined:locale.locale}}</ion-card-subtitle>
-          <ion-card-subtitle>Completado el: {{completedb.finishDate | date:'shortDate':undefined:locale.locale}}</ion-card-subtitle>
-          <ion-card-subtitle>Notas: {{completedb.notes}}</ion-card-subtitle>
+          <ion-card-subtitle>{{'completedBoss.startDate' | translate}}: {{completedb.startDate | date:'shortDate':undefined:locale.locale}}</ion-card-subtitle>
+          <ion-card-subtitle>{{'completedBoss.finishDate' | translate}}: {{completedb.finishDate | date:'shortDate':undefined:locale.locale}}</ion-card-subtitle>
+          <ion-card-subtitle>{{'completedBoss.notes' | translate}}: {{completedb.notes}}</ion-card-subtitle>
         </ion-col>
         <ion-col *ngIf="getCurrentUser()?.id==completedb.idUser" size="12" size-md="2">
           <ion-button (click)="onEditClick()"><ion-icon name="create-outline"></ion-icon></ion-button>

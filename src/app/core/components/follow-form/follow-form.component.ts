@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ModalController, ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { lastValueFrom } from 'rxjs';
 import { Follow } from '../../models';
 import { FollowService, UserService } from '../../services';
 
@@ -25,7 +27,8 @@ export class FollowFormComponent implements OnInit {
     private followData: FollowService,
     private fb:FormBuilder,
     private modal:ModalController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private translate: TranslateService
   ) { 
     this.form = this.fb.group({
       id:[null],
@@ -53,7 +56,7 @@ export class FollowFormComponent implements OnInit {
 
   async presentToastFollow() {
     const toast = await this.toastController.create({
-      message: '¡Has empezado a seguir a ' + this.getUserById()?.username + '!',
+      message: await lastValueFrom(this.translate.get('toasts.startedFollow')) + this.getUserById()?.username + '!',
       duration: 1500,
       position: 'top',
       color: 'success'

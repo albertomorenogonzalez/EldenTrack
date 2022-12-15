@@ -10,30 +10,29 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col size="6">
+      <ion-row size="6" size-md="12">
         <img src="https://drive.google.com/uc?export=view&id=1Jxr_VsN1HQJomckwRHqfOwFhp4E5sIiy">
-      </ion-col>
-      <ion-col size="6">
+      </ion-row>
+      <ion-row size="6" size-md="12">
         <ion-card>
           <ion-card-header>
             <ion-card-title>
-              Autor: Alberto Moreno González
+              {{'about.author' | translate}}: Alberto Moreno González
             </ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <ion-card-subtitle>
-              Asignatura: Acceso a Datos / Hora de Libre Configuración
+              {{'about.subject' | translate}}
             </ion-card-subtitle>
             <ion-card-subtitle>
-              Curso: 2º Desarrollo de Aplicaciones Multiplataforma (DAM)
+              {{'about.course' | translate}}
             </ion-card-subtitle>
             <ion-card-subtitle>
-              Centro: CPIFP Málaga Tech Park (desglose IES Campanillas)
+              {{'about.highSchool' | translate}}
             </ion-card-subtitle>
           </ion-card-content>
         </ion-card>
-      </ion-col>
+      </ion-row>
     </ion-row>
-    
   </ion-grid>
 </ion-content>

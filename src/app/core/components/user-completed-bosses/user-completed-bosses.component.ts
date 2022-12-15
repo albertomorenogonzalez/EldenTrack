@@ -34,8 +34,8 @@ export class UserCompletedBossesComponent implements OnInit {
     return this.userData.progress(user);
   }
 
-  getPercentace(user: User) {
-    return this.getProgress(user) * 100;
+  getPercentace(user: User): string {
+    return (this.getProgress(user) * 100).toFixed(2);
   }
 
   onDismiss(result: any){

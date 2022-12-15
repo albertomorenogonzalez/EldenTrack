@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
-import { Observable } from 'rxjs';
-import { Boss, Follow, User, UserService } from 'src/app/core';
+import { TranslateService } from '@ngx-translate/core';
+import { lastValueFrom } from 'rxjs';
+import { Follow, UserService } from 'src/app/core';
 import { FollowService } from 'src/app/core/services/follow.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class FollowedUsersPage implements OnInit {
     private userData: UserService,
     private followData: FollowService,
     private toastController: ToastController,
-    private alert: AlertController
+    private alert: AlertController,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {
@@ -59,18 +61,18 @@ export class FollowedUsersPage implements OnInit {
 
   async onUnfollowAlert(follow: Follow){
     const alert = await this.alert.create({
-      header: await 'Atención',
-      message: await '¿Está seguro de que quiere dejar de seguir a este usuario?',
+      header: await lastValueFrom(this.translate.get('alerts.warning')),
+      message: await lastValueFrom(this.translate.get('alerts.unfollow')),
       buttons: [
         {
-          text: await 'Cancelar',
+          text: await await lastValueFrom(this.translate.get('home.cancel')),
           role: 'cancel',
           handler: () => {
             console.log("Operacion cancelada");
           },
         },
         {
-          text: await 'Dejar de Seguir',
+          text: await lastValueFrom(this.translate.get('home.unfollow')),
           role: 'confirm',
           handler: () => {
             this.followData.unfollowById(follow.idFollowed);
@@ -87,7 +89,7 @@ export class FollowedUsersPage implements OnInit {
 
   async presentToastUnfollow(idFollowed: number) {
     const toast = await this.toastController.create({
-      message: 'Has dejado de seguir a ' + this.getUserById(idFollowed)?.username,
+      message: await lastValueFrom(this.translate.get('toasts.unfollow')) + this.getUserById(idFollowed)?.username,
       duration: 1500,
       position: 'top',
       color: 'danger'

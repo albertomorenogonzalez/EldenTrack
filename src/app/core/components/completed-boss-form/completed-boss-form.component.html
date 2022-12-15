@@ -1,18 +1,18 @@
 <ion-content>
   <form [formGroup]="form" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()">
     <ion-toolbar>
-      <ion-title> Completado - {{getAddedBoss()?.name}}</ion-title>
+      <ion-title> {{'completedBoss.completed' | translate}} - {{getAddedBoss()?.name}}</ion-title>
     </ion-toolbar>
     <ion-img src="{{getAddedBoss()?.image}}"></ion-img>
     <app-date-time-selectable [atributeName]="'startDate'" formControlName="startDate"></app-date-time-selectable>
     <app-date-time-selectable [atributeName]="'finishDate'" formControlName="finishDate"></app-date-time-selectable>
     <ion-item>
-      <ion-label position="floating">Notas</ion-label>
-      <ion-input placeholder="Inserte alguna apreciación" formControlName="notes" type="text"></ion-input>
+      <ion-label position="floating">{{'completedBoss.notes' | translate}}</ion-label>
+      <ion-input placeholder="{{'completedBoss.placeHolderNotes' | translate}}" formControlName="notes" type="text"></ion-input>
     </ion-item>
     <div>
-      <ion-button [disabled]="!form.valid" type="submit">{{mode=="Edit" ? "Editar" : "Añadir"}}</ion-button>
-      <ion-button color="danger" (click)="onDismiss()" type="button">Cancelar</ion-button>
+      <ion-button [disabled]="!form.valid" type="submit">{{mode=="Edit" ? ['home.edit' | translate] : ['home.add' | translate]}}</ion-button>
+      <ion-button color="danger" (click)="onDismiss()" type="button">{{'home.cancel' | translate}}</ion-button>
     </div>
   </form>
 </ion-content>

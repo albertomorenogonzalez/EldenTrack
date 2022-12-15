@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { lastValueFrom } from 'rxjs';
 import { Boss } from '../../models/boss.model';
 import { CompletedBoss } from '../../models/completed-boss.model';
 import { BossService, UserService } from '../../services';
@@ -24,7 +26,8 @@ export class BossComponent implements OnInit {
     public locale:LocaleService,
     private userData: UserService,
     private bossData: BossService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {}
@@ -73,7 +76,7 @@ export class BossComponent implements OnInit {
 
   async presentToastAdd() {
     const toast = await this.toastController.create({
-      message: 'Jefe Completado ¡Enhorabuena! Revisa tu perfil para verlo',
+      message: await lastValueFrom(this.translate.get('toasts.completedBoss')),
       duration: 1500,
       position: 'top',
       color: 'success'

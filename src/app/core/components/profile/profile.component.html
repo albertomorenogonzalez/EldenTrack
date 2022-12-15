@@ -10,9 +10,10 @@
         </ion-col>
         <ion-col size="12" size-md="7">
           <ion-card-title>{{user.username}}</ion-card-title>
-          <ion-card-subtitle>Nombre Completo: {{user.name}} {{user.surname}}</ion-card-subtitle>
+          <ion-card-subtitle>{{'user.fullName' | translate}}: {{user.name}} {{user.surname}}</ion-card-subtitle>
           <ion-card-subtitle>{{'user.birthdate' | translate}}: {{user.birthdate | date:'shortDate':undefined:locale.locale}}</ion-card-subtitle>
           <ion-card-subtitle>Email: {{user.email}}</ion-card-subtitle>
+          <ion-card-subtitle>{{'user.progress' | translate}}: {{getPercentace(user)}} %  {{getProgressInNumbers(user)}}</ion-card-subtitle>
         </ion-col>
         <ion-col size="12" size-md="2">
           <ion-button (click)="onEditClick()"><ion-icon name="create-outline" ></ion-icon></ion-button>
@@ -21,4 +22,5 @@
     </ion-grid>
 
   </ion-card-header>
+  <ion-progress-bar [value]="getProgress(user)"></ion-progress-bar>
 </ion-card>

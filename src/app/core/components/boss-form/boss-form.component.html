@@ -1,35 +1,35 @@
 <ion-content>
   <form [formGroup]="form" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()">
     <ion-toolbar>
-      <ion-title>{{mode=="Edit" ? "Editar Datos del Jefe" : "Añadir Jefe"}}</ion-title>
+      <ion-title>{{mode=="Edit" ? ['boss.updateInformation' | translate] : ['boss.addInformation' | translate]}}</ion-title>
     </ion-toolbar>
     <ion-item>
-      <ion-label position="floating">Nombre del Jefe</ion-label>
-      <ion-input placeholder="Nombre" formControlName="name" type="text"></ion-input>
+      <ion-label position="floating">{{'boss.bossName' | translate}}</ion-label>
+      <ion-input placeholder="{{'user.placeholderName' | translate}}" formControlName="name" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Área del jefe</ion-label>
-      <ion-input placeholder="Área" formControlName="area" type="text"></ion-input>
+      <ion-label position="floating">{{'boss.bossArea' | translate}}</ion-label>
+      <ion-input placeholder="{{'boss.placeHolderArea' | translate}}" formControlName="area" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Localización concreta del jefe</ion-label>
-      <ion-input placeholder="Localización" formControlName="location" type="text"></ion-input>
+      <ion-label position="floating">{{'boss.bossLocation' | translate}}</ion-label>
+      <ion-input placeholder="{{'boss.placeHolderLocation' | translate}}" formControlName="location" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Descripción</ion-label>
-      <ion-input placeholder="Descripción" formControlName="description" type="text"></ion-input>
+      <ion-label position="floating">{{'boss.bossDescription' | translate}}</ion-label>
+      <ion-input placeholder="{{'boss.bossDescription' | translate}}" formControlName="description" type="text"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Número de Puntos de Vida</ion-label>
-      <ion-input placeholder="Puntos de Vida" formControlName="lifePoints" type="number"></ion-input>
+      <ion-label position="floating">{{'boss.bossLifePoints' | translate}}</ion-label>
+      <ion-input placeholder="{{'boss.placeHolderLifePoints' | translate}}" formControlName="lifePoints" type="number"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Imagen del jefe</ion-label>
-      <ion-input placeholder="Imagen" formControlName="image" type="text"></ion-input>
+      <ion-label position="floating">{{'boss.bossImage' | translate}}</ion-label>
+      <ion-input placeholder="{{'boss.placeHolderImage' | translate}}" formControlName="image" type="text"></ion-input>
     </ion-item>
     <div>
-      <ion-button [disabled]="!form.valid" type="submit">{{mode=="Edit" ? "Editar" : "Añadir"}}</ion-button>
-      <ion-button color="danger" (click)="onDismiss()" type="button">Cancelar</ion-button>
+      <ion-button [disabled]="!form.valid" type="submit">{{mode=="Edit" ? ['home.edit' | translate] : ['home.add' | translate]}}</ion-button>
+      <ion-button color="danger" (click)="onDismiss()" type="button">{{'home.cancel' | translate}}</ion-button>
     </div>
   </form>
 </ion-content>

@@ -23,7 +23,6 @@ export class AppComponent {
     private localeService:LocaleService,
     private userData: UserService,
     private followData: FollowService,
-    private toastController: ToastController,
     private cdr:ChangeDetectorRef
   ) {
     this.translate.setDefaultLang('es');
@@ -39,12 +38,10 @@ export class AppComponent {
       case 0:
         this.translate.setDefaultLang('es');
         this.localeService.registerCulture('es');
-        console.log(this.localeService.locale);
         break;
       case 1:
         this.translate.setDefaultLang('en');
         this.localeService.registerCulture('en-uk');
-        console.log(this.localeService.locale);
         break;
     }
     this.cdr.detectChanges();

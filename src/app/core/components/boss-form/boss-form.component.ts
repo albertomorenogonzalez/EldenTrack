@@ -36,7 +36,7 @@ export class BossFormComponent implements OnInit {
       location:["", [Validators.required]],
       description:["", [Validators.required]],
       lifePoints:["", [Validators.required]],
-      image:["", [Validators.required]]
+      image:["http://drive.google.com/uc?export=view&id=1vSlO45EELqrz7Vh-Avm440NtGh3_7XKM", [Validators.required]]
     });
   }
 

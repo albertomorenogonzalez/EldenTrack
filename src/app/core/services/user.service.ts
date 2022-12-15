@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { BehaviorSubject } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { BehaviorSubject, lastValueFrom } from 'rxjs';
 import { User } from '../models/user.model';
 import { BossService } from './boss.service';
 import { CompletedBossService } from './completed-boss.service';
@@ -93,7 +94,8 @@ export class UserService {
     private router:Router,
     private bossData: BossService,
     private completedbData: CompletedBossService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private translate: TranslateService
   ) { 
   }
 
@@ -172,7 +174,7 @@ export class UserService {
 
   async presentToastLoggedUser() {
     const toast = await this.toastController.create({
-      message: '¡Bienvenido, ' + this.currentUser?.username + '!',
+      message: await lastValueFrom(this.translate.get('toasts.logged')) + this.currentUser?.username + '!',
       duration: 1500,
       position: 'top'
     });
@@ -182,7 +184,7 @@ export class UserService {
 
   async presentToastIncorrectPassword() {
     const toast = await this.toastController.create({
-      message: 'Contraseña incorrecta',
+      message: await lastValueFrom(this.translate.get('toasts.incorrectPassword')),
       duration: 1500,
       position: 'top',
       color: 'danger'
@@ -193,7 +195,7 @@ export class UserService {
 
   async presentToastUnregisteredUser() {
     const toast = await this.toastController.create({
-      message: 'Usuario no encontrado',
+      message: await lastValueFrom(this.translate.get('toasts.incorrectPassword')),
       duration: 1500,
       position: 'top',
       color: 'danger'
