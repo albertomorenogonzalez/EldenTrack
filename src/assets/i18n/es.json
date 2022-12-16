@@ -29,7 +29,9 @@
     "follow": "Seguir",
     "unfollow": "Dejar de Seguir",
     "delete": "Borrar",
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "follows": "Seguidos",
+    "explore": "Explorar"
   },
 
   "user": {
