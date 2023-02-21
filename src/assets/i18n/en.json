@@ -82,13 +82,12 @@
   },
 
   "toasts": {
-    "completedBoss":"Boss Completed ¡Congratulations! Go to your Profile to see It",
+    "completedBoss":"Boss Completed ¡Congratulations! Go to your Profile to see it",
     "startedFollow":"Now you follow ",
     "userAdded":"User Acces Succesfuly!",
     "unfollow":"You unfollowed ",
     "logged": "Welcome, ",
-    "incorrectPassword": "Incorrect Password",
-    "userNotFound":"User not Found",
+    "incorrectUserOrPassword": "Incorrect User or Password",
     "addBoss":"Boss Added Succesfuly",
     "update":"Information Update Succesfuly",
     "deleteBoss":"Boss Deleted",

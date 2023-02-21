@@ -137,10 +137,10 @@ export class UserService {
         this.presentToastLoggedUser()
         this.login()
       } else {
-        this.presentToastIncorrectPassword();
+        this.presentToastIncorrectUserOrPassword();
       }
     } else {
-      this.presentToastUnregisteredUser();
+      this.presentToastIncorrectUserOrPassword();
     }
      
   }
@@ -182,20 +182,9 @@ export class UserService {
     await toast.present();
   }
 
-  async presentToastIncorrectPassword() {
+  async presentToastIncorrectUserOrPassword() {
     const toast = await this.toastController.create({
-      message: await lastValueFrom(this.translate.get('toasts.incorrectPassword')),
-      duration: 1500,
-      position: 'top',
-      color: 'danger'
-    });
-
-    await toast.present();
-  }
-
-  async presentToastUnregisteredUser() {
-    const toast = await this.toastController.create({
-      message: await lastValueFrom(this.translate.get('toasts.incorrectPassword')),
+      message: await lastValueFrom(this.translate.get('toasts.incorrectUserOrPassword')),
       duration: 1500,
       position: 'top',
       color: 'danger'

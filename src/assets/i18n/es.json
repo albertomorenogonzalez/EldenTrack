@@ -6,7 +6,7 @@
   },
 
   "title": {
-    "register":"Registrarse",
+    "register":"Regístrate",
     "home":"Inicio",
     "profile":"Perfil",
     "bosses":"Jefes",
@@ -87,8 +87,7 @@
     "userAdded":"Usuario Añadido con Éxito",
     "unfollow":"Has Dejado de Seguir a ",
     "logged": "¡Bienvenido, ",
-    "incorrectPassword": "Contraseña Incorrecta",
-    "userNotFound":"Usuario no Encontrado",
+    "incorrectUserOrPassword": "El Usuario o la Contraseña no son correctos",
     "addBoss":"Jefe Añadido con Éxito",
     "update":"Datos Modificados con Éxito",
     "deleteBoss":"Jefe eliminado",
