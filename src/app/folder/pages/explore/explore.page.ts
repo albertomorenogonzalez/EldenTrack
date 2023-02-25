@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { lastValueFrom } from 'rxjs';
-import { Follow, FollowService, UserService } from 'src/app/core';
+import { FirebaseService, Follow, FollowService, UserService } from 'src/app/core';
 import { User } from 'src/app/core/models/user.model';
 
 @Component({
@@ -13,16 +13,18 @@ import { User } from 'src/app/core/models/user.model';
 export class ExplorePage implements OnInit {
 
   constructor(
-    private userData: UserService,
+    public userData: UserService,
+    private userSvc: UserService,
     private alert: AlertController,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private firebase:FirebaseService
   ) { }
 
   ngOnInit() {
   }
 
   getUserList() {
-    return this.userData.user$;
+    return this.userSvc._user$;
   }
 
   async onDeleteAlert(user: User){
@@ -41,7 +43,7 @@ export class ExplorePage implements OnInit {
           text: await lastValueFrom(this.translate.get('home.delete')),
           role: 'confirm',
           handler: () => {
-            this.userData.deleteUserById(user.id);
+            this.userSvc.deleteUserById(user.id);
           },
         },
       ],
@@ -64,13 +66,13 @@ export class ExplorePage implements OnInit {
   } 
   
   getCurrentUser(){
-    return this.userData.currentUser;
+    return this.userSvc.currentUser;
   }
 
-  getItemDisplay(idUser: number): string {
+  getItemDisplay(userEmail: string): string {
     var display = 'inline';
 
-    if (idUser==this.getCurrentUser()?.id) {
+    if (userEmail==this.userSvc.currentUser.email) {
       display = 'none';
     } else {
       display = 'inline';

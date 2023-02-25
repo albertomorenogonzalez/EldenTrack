@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { FollowService, LocaleService, User } from './core';
@@ -23,7 +24,8 @@ export class AppComponent {
     private localeService:LocaleService,
     private userData: UserService,
     private followData: FollowService,
-    private cdr:ChangeDetectorRef
+    private cdr:ChangeDetectorRef,
+    private router:Router
   ) {
     this.translate.setDefaultLang('es');
   }
@@ -52,10 +54,11 @@ export class AppComponent {
   }
 
   logOut() {
-    window.location.reload();
+    this.user.signOut();
+    this.router.navigate(['login']);
   }
 
   getUserActive():User|undefined {
-    return this.userData.currentUser;
+    return this.userData.currentUser as unknown as User;
   }
 }

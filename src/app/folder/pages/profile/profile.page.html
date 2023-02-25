@@ -8,13 +8,13 @@
 </ion-header>
 
 <ion-content>
-  <app-profile [user]="getUserActive()" (onEdit)="onEditProfile($event)"></app-profile>
+  <app-profile [user]="(user.user$ | async)" (onEdit)="onEditProfile($event)"></app-profile>
   <div>
     <ion-title>{{'user.completedBosses' | translate | uppercase}}</ion-title> 
   </div>
   <ion-grid>
     <ion-col [ngStyle]="{'display':getItemDisplay(completedb)}" *ngFor="let completedb of getCompletedBosses() | async" size="6" size-xl="3">
-      <app-completed-boss *ngIf="completedb.idUser==getUserActive()?.id" [completedb]="completedb" (onEdit)="onEditCompletedBoss($event)" (onDelete)="onDeleteCompletedBoss($event)"></app-completed-boss>
+      <app-completed-boss *ngIf="completedb.idUser==(user.user$ | async).id" [completedb]="completedb" (onEdit)="onEditCompletedBoss($event)" (onDelete)="onDeleteCompletedBoss($event)"></app-completed-boss>
     </ion-col>
   </ion-grid>
 </ion-content>
