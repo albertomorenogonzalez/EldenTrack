@@ -1,28 +1,66 @@
 <ion-content>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onRegister()" (keyup.enter)="onRegister()">
     <ion-toolbar>
       <ion-title>{{mode=="Edit" ? ['user.updateInformation' | translate] : ['title.register' | translate]}}</ion-title>
     </ion-toolbar>
     <ion-item>
-      <ion-label position="floating">{{'user.userName' | translate}}</ion-label>
+      <ion-label position="floating">{{'user.userName' | translate}}<span class="required" *ngIf="form.controls['name'].errors">&nbsp;&#42;</span></ion-label>
       <ion-input placeholder="{{'user.placeholderName' | translate}}" formControlName="name" type="text"></ion-input>
+      <span
+      class="validationError"
+      *ngFor="let error of errorsToArray(form.controls['name'].errors)"
+      >{{'validators.' + error | translate}}</span>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">{{'user.userSurname' | translate}}</ion-label>
+      <ion-label position="floating">{{'user.userSurname' | translate}}<span class="required" *ngIf="form.controls['surname'].errors">&nbsp;&#42;</span></ion-label>
       <ion-input placeholder="{{'user.placeHolderSurname' | translate}}" formControlName="surname" type="text"></ion-input>
+      <span
+      class="validationError"
+      *ngFor="let error of errorsToArray(form.controls['surname'].errors)"
+      >{{'validators.' + error | translate}}</span>
     </ion-item>
     <app-date-time-selectable [atributeName]="'birthdate'" formControlName="birthdate"></app-date-time-selectable>
     <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input placeholder="Email" formControlName="email" type="text"></ion-input>
+      <ion-label position="floating">
+        Email<span class="required" *ngIf="form.controls['email'].errors">&nbsp;&#42;</span>
+      </ion-label>
+      <ion-input autocomplete="email" placeHolder="Email" type="text" formControlName="email"></ion-input>
+      <span
+      class="validationError"
+      *ngFor="let error of errorsToArray(form.controls['email'].errors)"
+      >{{'validators.' + error | translate}}</span>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">{{'user.userUsername' | translate}}</ion-label>
+      <ion-label position="floating">{{'user.userUsername' | translate}}<span class="required" *ngIf="form.controls['username'].errors">&nbsp;&#42;</span></ion-label>
       <ion-input placeholder="{{'login.user' | translate}}" formControlName="username" type="text"></ion-input>
+      <span
+      class="validationError"
+      *ngFor="let error of errorsToArray(form.controls['username'].errors)"
+      >{{'validators.' + error | translate}}</span>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">{{'login.password' | translate}}</ion-label>
-      <ion-input placeholder="{{'login.password' | translate}}" formControlName="password" type="password"></ion-input>
+      <ion-label position="floating">{{'login.password' | translate}}<span class="required" *ngIf="form.controls['password'].errors">&nbsp;&#42;</span></ion-label>
+      <ion-input placeholder="{{'login.password' | translate}}" formControlName="password" #passwordEyeRegister  [type]="passwordTypeInput"  formControlName="password" clearOnEdit="false"></ion-input>
+      <ion-button  item-end  class="btn_eye_icon"  (click)="togglePasswordMode()">
+        <ion-icon slot="icon-only" [name]="(passwordTypeInput === 'text')?'eye-off':'eye'"></ion-icon>
+      </ion-button>
+      <span
+        class="validationError"
+        *ngIf="hasFormError('passwordProto')"
+        >{{'validators.passwordProto' | translate}}</span>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        {{'login.confirmPassword' | translate}}<span class="required" *ngIf="form.controls['confirmPassword'].errors">&nbsp;&#42;</span>
+      </ion-label>
+      <ion-input placeholder="{{'login.password' | translate}}" (keyup.enter)="form.valid?onRegister():null" [enterkeyhint]="'enter'" formControlName="password" #passwordEyeRegister  [type]="passwordTypeInput"  formControlName="confirmPassword" clearOnEdit="false"></ion-input>
+      <ion-button  item-end  class="btn_eye_icon"  (click)="togglePasswordMode()">
+        <ion-icon slot="icon-only" [name]="(passwordTypeInput === 'text')?'eye-off':'eye'"></ion-icon>
+      </ion-button>
+      <span
+        class="validationError"
+        *ngIf="hasFormError('passwordMatch') && form.get('confirmPassword').value"
+        >{{'validators.passwordMatch' | translate}}</span>
     </ion-item>
     <ion-item>
       <ion-label position="floating">{{'user.profilePick' | translate}}</ion-label>
