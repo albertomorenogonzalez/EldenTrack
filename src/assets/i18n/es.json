@@ -1,8 +1,10 @@
 {
   "login": {
     "title":"Iniciar Sesión",
+    "email":"Correo Electrónico",
     "user":"Usuario",
-    "password":"Contraseña"
+    "password":"Contraseña",
+    "confirmPassword":"Vuelva a Introducir la contraseña"
   },
 
   "title": {
@@ -86,7 +88,7 @@
     "startedFollow":"¡Has Empezado a Seguir a ",
     "userAdded":"Usuario Añadido con Éxito",
     "unfollow":"Has Dejado de Seguir a ",
-    "logged": "¡Bienvenido, ",
+    "logged": "¡Bienvenido!",
     "incorrectUserOrPassword": "El Usuario o la Contraseña no son correctos",
     "addBoss":"Jefe Añadido con Éxito",
     "update":"Datos Modificados con Éxito",
@@ -102,5 +104,11 @@
     "accessDeniedMessage":"Necesita ser un administrador para realizar esta acción",
     "deleteUser":"¿Está seguro de que quiere eliminar este usuario?",
     "deleteCompletedBoss":"¿Está seguro de que quiere borrar este jefe completado?"
+  },
+
+  "validators":{
+      "passwordMatch": "Las contraseñas no coinciden",
+      "passwordProto": "La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número",
+      "email": "Debe introducir un email válido"
   }
 }

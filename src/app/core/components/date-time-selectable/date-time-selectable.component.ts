@@ -3,7 +3,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { IonAccordionGroup, IonDatetime } from '@ionic/angular';
 import * as moment from 'moment';
 import { BehaviorSubject } from 'rxjs';
-import { LocaleService } from '../../services/localeService';
+import { LocaleService } from '../../services/locale.service';
 
 export const DATE_TIME_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
