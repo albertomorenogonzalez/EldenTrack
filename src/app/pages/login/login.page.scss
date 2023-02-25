@@ -39,20 +39,3 @@ ion-card-header{
 #loginBox {
    height: 600px;;
 }
-
-.btn_eye_icon{
-   width:15%;
-   position:absolute;
-   right: 0;
-   bottom: 4px;
-   z-index: 999;
-   --background: transparent;
-   ion-icon{
-       font-size: 22px;
-       color:#757575;
-   }
- }
- 
- .btn_eye_icon:focus{
-   outline: none  !important;
- }

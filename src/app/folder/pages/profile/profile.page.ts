@@ -17,7 +17,6 @@ import { UserService } from 'src/app/core/services/user.service';
 export class ProfilePage implements OnInit {
 
   constructor(
-    public user: UserService,
     private userData: UserService,
     private bossData: BossService,
     private completedBossData: CompletedBossService,

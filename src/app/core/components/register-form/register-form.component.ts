@@ -1,9 +1,9 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ModalController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { lastValueFrom } from 'rxjs';
-import { PasswordValidation } from '../../utils';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-register-form',
@@ -14,58 +14,52 @@ export class RegisterFormComponent implements OnInit {
 
   form:FormGroup;
   mode:"New" | "Edit" = "New";
+  @Input('user') set user(user:User) {
+    if(user) {
+      this.form.controls['id'].setValue(user.id);
+      this.form.controls['admin'].setValue(user.admin);
+      this.form.controls['name'].setValue(user.name);
+      this.form.controls['surname'].setValue(user.surname);
+      this.form.controls['birthdate'].setValue(user.birthdate);
+      this.form.controls['email'].setValue(user.email);
+      this.form.controls['username'].setValue(user.username);
+      this.form.controls['password'].setValue(user.password);
+      this.form.controls['profilePick'].setValue(user.profilePick);
+      this.mode = "Edit";
+    }
+  }
+
   constructor(
     private fb:FormBuilder,
     private modal:ModalController,
     private toastController: ToastController,
     private translate: TranslateService
-  ) {
+  ) { 
     this.form = this.fb.group({
       id:[null],
       admin:[false],
       name:["", [Validators.required]],
       surname:["", [Validators.required]],
       birthdate:["", [Validators.required]],
-      email:["", [Validators.required, Validators.email]],
+      email:["", [Validators.required]],
       username:["", [Validators.required]],
       password:["", [Validators.required]],
-      confirmPassword:["", Validators.required],
-      profilePick:['https://ionicframework.com/docs/img/demos/avatar.svg']
-    },{validator:[PasswordValidation.passwordMatch, PasswordValidation.passwordProto]});
+      profilePick:['https://ionicframework.com/docs/img/demos/avatar.svg', [Validators.required]]
+    });
   }
 
-  ngOnInit() {}
-
-  onRegister(){
-    this.modal.dismiss({
-      name:this.form.value.name,
-      surname:this.form.value.surname,
-      birthdate:this.form.value.birthdate,
-      email:this.form.value.email,
-      username:this.form.value.username,
-      password:this.form.value.password,
-      profilePick:this.form.value.profilePick
-      
-    }, 'ok');
-
-    this.presentToastAdd();
+  ngOnInit() {
   }
-
-  hasFormError(error){
-    return this.form?.errors && Object.keys(this.form.errors).filter(e=>e==error).length==1;
-  }
-  
-  errorsToArray(errors){
-   
-    if(errors && !('required' in errors))
-      return [Object.keys(errors)[0]];
-    else
-      return [];
-  } 
 
 
   formatDate(date:moment.Moment){
     return date.format('YYYY-MM-DDT');
+  }
+  
+
+  onSubmit(){
+    this.modal.dismiss({user: this.form.value, mode:this.mode}, 'ok');
+    this.presentToastAdd();
   }
 
   onDismiss(){
@@ -82,27 +76,6 @@ export class RegisterFormComponent implements OnInit {
     });
 
     await toast.present();
-  }
-
-
-  @ViewChild('passwordEyeRegister', { read: ElementRef }) passwordEye: ElementRef;
-
-  passwordTypeInput  =  'password';
-
-  togglePasswordMode() {
-          
-    this.passwordTypeInput = this.passwordTypeInput === 'text' ? 'password' : 'text';
-      
-      const nativeEl = this.passwordEye.nativeElement.querySelector('input');
-      
-      const inputSelection = nativeEl.selectionStart;
-      
-      nativeEl.focus();
-      
-      setTimeout(() => {
-        nativeEl.setSelectionRange(inputSelection, inputSelection);
-      }, 1);
-
   }
 
 }

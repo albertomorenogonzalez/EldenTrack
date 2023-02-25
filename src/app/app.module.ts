@@ -8,10 +8,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { LocaleService } from './core/services/locale.service';
+import { LocaleService } from './core/services/localeService';
 import { createTranslateLoader } from './core/utils/translate';
 import { CoreModule, LocaleId } from './core/core.module';
-import { FirebaseService, FirebaseWebService } from './core';
 
 
 @NgModule({
@@ -33,11 +32,6 @@ import { FirebaseService, FirebaseWebService } from './core';
       deps: [LocaleService],
       useClass: LocaleId
     },
-    {
-      provide:FirebaseService,
-      deps:[],
-      useFactory:()=>new FirebaseWebService()
-    }
  
   ],
   bootstrap: [AppComponent],

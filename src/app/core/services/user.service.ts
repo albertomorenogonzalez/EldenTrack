@@ -1,160 +1,116 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { DocumentData } from '@firebase/firestore';
 import { ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, lastValueFrom } from 'rxjs';
-import { User, UserLogin, UserRegister } from '../models/user.model';
+import { User } from '../models/user.model';
 import { BossService } from './boss.service';
 import { CompletedBossService } from './completed-boss.service';
-import { FirebaseService } from './firebase/firebase-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  
+  private _userList: User[] = [
+    {
+      id: 1,
+      admin: true,
+      name: 'Alberto',
+      surname: 'Moreno González',
+      birthdate: '2003-01-11',
+      email: 'albertomorenogonzalez95@gmail.com',
+      username: 'Gyobu Oniwa',
+      password: 'Ashina3',
+      profilePick: 'http://drive.google.com/uc?export=view&id=1Gbxra57Jf0kDzqMd9sK2ksXI9K-TUIRk'
+    },
+    {
+      id: 2,
+      admin: false,
+      name: 'Juan Antonio',
+      surname: 'Aranda Gálvez',
+      birthdate: '2001-06-13',
+      email: 'juananpro13@gmail.com',
+      username: 'Galnio',
+      password: 'PeepoClown',
+      profilePick: 'http://drive.google.com/uc?export=view&id=1tqvd0kdOyuAEm4PdU_97-lay83DUBZt1'
+    },
+    {
+      id: 3,
+      admin: false,
+      name: 'Adiel',
+      surname: 'Roca Flores',
+      birthdate: '2002-10-13',
+      email: 'adifirel13@gmail.com',
+      username: 'Yametekudasaioni',
+      password: 'MarDeBolivia',
+      profilePick: 'http://drive.google.com/uc?export=view&id=1DcTaP7omPSv57wSvSKt4IkzQkVN8EqoD'
+    },
+    {
+      id: 4,
+      admin: false,
+      name: 'David',
+      surname: 'Antúnez Pérez',
+      birthdate: '2003-06-20',
+      email: 'antunez49@gmail.com',
+      username: 'An2',
+      password: 'VideosDeValorant',
+      profilePick: 'https://drive.google.com/uc?export=view&id=1a0BQyfhp2MhJpAWnRcjhH8iRFd0N4LcB'
+    },
+    {
+      id: 5,
+      admin: false,
+      name: 'Alejandro',
+      surname: 'Cueto Jiménez',
+      birthdate: '2003-02-03',
+      email: 'alecueto@gmail.com',
+      username: 'Cueto',
+      password: 'UnityIsLoveUnityIsLiveJueguitos',
+      profilePick: 'https://drive.google.com/uc?export=view&id=194o1KqIAfAbWV8SZwNB2Cz2SsuPmx0dm'
+    },
+    {
+      id: 6,
+      admin: false,
+      name: 'Sergio',
+      surname: 'Morales ',
+      birthdate: '2003-10-27',
+      email: 'spidermantiktok@gmail.com',
+      username: 'The amaising Mourals',
+      password: 'spiderman',
+      profilePick: 'https://drive.google.com/uc?export=view&id=1Qj02Tzvk4tD8GhIpHoHdE3zUmxY5yO_f'
+    },
+  ]
 
-  private _userList: User[] = [];
+  private _userConnected:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public userConnected$ = this._userConnected.asObservable();
 
-  private _userLogged:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public userLogged$ = this._userLogged.asObservable();
-
-  private _user:BehaviorSubject<User> = new BehaviorSubject(null);
+  private _user:BehaviorSubject<User[]> = new BehaviorSubject(this._userList);
   public user$ = this._user.asObservable();
 
-  private _userSubject:BehaviorSubject<User[]> = new BehaviorSubject([]);
-  public _user$ = this._userSubject.asObservable();
+  public currentUser: User | undefined
 
-  public currentUser: User;
-
-  unsubscr;
+  id:number = this._userList.length+1;
   constructor(
-    private firebase:FirebaseService,
     private router:Router,
     private bossData: BossService,
     private completedbData: CompletedBossService,
     private toastController: ToastController,
     private translate: TranslateService
-  ) {
-    this.init();
-    this.unsubscr = this.firebase.subscribeToCollection('usuarios',this._userSubject, this.mapUser);
+  ) { 
   }
 
-  gOnDestroy(): void {
-    this.unsubscr();
+  getUserList() {
+    return this._user;
   }
 
-  private mapUser(doc:DocumentData){
-    return {
-      id:0,
-      docId:doc['id'],
-      admin: doc['data']().admin,
-      name: doc['data']().name,
-      surname: doc['data']().surname,
-      birthdate: doc['data']().birthdate,
-      email: doc['data']().email,
-      username: doc['data']().username,
-      password: doc['data']().password,
-      profilePick: doc['data']().profilePick
-    };
-  }
-
-  private async init(){
-    this.firebase.isLogged$.subscribe(async (logged)=>{
-      if(logged){
-        this._user.next((await this.firebase.getDocument('usuarios', this.firebase.getUser().uid)).data as User);
-        this.router.navigate(['folder/home']);
-      }
-      this._userLogged.next(logged);
-    });
-    
-  }
-
-  public login(credentials:UserLogin):Promise<string>{
-    return new Promise<string>(async (resolve, reject)=>{
-      if(!this._userLogged.value){
-        try {
-          await this.firebase.connectUserWithEmailAndPassword(credentials.username, credentials.password);
-          this.presentToastLoggedUser();
-          this.currentUser = await this.getUserByIdd(this.firebase.getUser().uid);
-        } catch (error) {
-          reject(error);
-        }
-      }
-      else{
-        reject('already connected');
-      }
-    });
-    
-  }
-
-  signOut(){
-    this.firebase.signOut();
-    this.router.navigate(['login']);
-  }
-  
-  public async register(data: UserRegister){
-    try {
-      if (!this._userLogged.value) {
-        const user = await this.firebase.createUserWithEmailAndPassword(data.email, data.password);
-        const userData = {
-          uid: user.user.uid,
-          admin: false,
-          username: data.username, 
-          profilePick: data.profilePick,
-          email: data.email,
-          provider: "firebase",
-          token: await user.user.getIdToken(),
-          name: data.name,
-          surname: data.surname,
-          birthdate: data.birthdate,
-          
-        };
-        await this.firebase.createDocumentWithId('usuarios', userData, user.user.uid);
-        await this.firebase.connectUserWithEmailAndPassword(data.email, data.password);
-      } else {
-        throw new Error('Already connected');
-      } 
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  }
-
-  getUserList(){
-    return this._userSubject.value;
-  }
-
-  getUserByIdd(id:string):Promise<User>{
-    return new Promise<User>(async (resolve, reject)=>{
-      try {
-        var user = (await this.firebase.getDocument('usuarios', id));
-        resolve({
-          id:0,
-          docId: user.id,
-          admin: user.data['admin'],
-          name:user.data['name'],
-          surname: user.data['surname'],
-          birthdate: user.data['birthdate'],
-          email: user.data['email'],
-          username: user.data['username'],
-          password: user.data['password'],
-          profilePick: user.data['profilePick'] 
-        });  
-      } catch (error) {
-        reject(error);
-      }
-    });
-  }
-
-  getUserById(id: number):User {
+  getUserById(id: number) {
     return this._userList.find(u=>u.id==id);
   }
 
-  
-
   addUser(user:User) {
+    user.id = this.id++;
     this._userList.push(user);
+    this._user.next(this._userList);
   }
 
   updateUser(user:User) {
@@ -169,13 +125,39 @@ export class UserService {
       _user.profilePick = user.profilePick
     }
     
-    
+    this._user.next(this._userList);
+  }
+
+  validateUser(user:User) {
+    var userLogin = this._userList.find(u=>u.username==user.username)
+
+    if (userLogin!=null) {
+      if (userLogin?.password==user.password) {
+        this.currentUser = userLogin;
+        this.presentToastLoggedUser()
+        this.login()
+      } else {
+        this.presentToastIncorrectUserOrPassword();
+      }
+    } else {
+      this.presentToastIncorrectUserOrPassword();
+    }
+     
+  }
+
+  login() {
+    this._userConnected.next(true);
+  }
+
+  disconnect() {
+    this._userConnected.next(false);
+    this.router.navigate(['folder/home']);
   }
 
   deleteUserById(id:number) {
     this._userList = this._userList.filter(u=>u.id != id); 
+    this._user.next(this._userList);
   }
-
 
   numberOfBossesCompleted(user: User):number {
     return this.completedbData.getCompletedBossesByUserId(user.id).length
@@ -192,7 +174,7 @@ export class UserService {
 
   async presentToastLoggedUser() {
     const toast = await this.toastController.create({
-      message: await lastValueFrom(this.translate.get('toasts.logged')),
+      message: await lastValueFrom(this.translate.get('toasts.logged')) + this.currentUser?.username + '!',
       duration: 1500,
       position: 'top'
     });

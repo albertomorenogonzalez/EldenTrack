@@ -1,10 +1,10 @@
 <ion-app>
-  <ion-split-pane *ngIf="(user.userLogged$ | async)" contentId="main-content">
+  <ion-split-pane *ngIf="(user.userConnected$ | async)" contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
         <ion-chip>
           <ion-avatar (click)="logOut()">
-            <ion-img src="{{(user.user$ | async).profilePick}}"></ion-img>
+            <ion-img src="{{getUserActive()?.profilePick}}"></ion-img>
           </ion-avatar>
           <ion-button fill="clear" (click)="logOut()" type="button">{{'home.logOut' | translate}}</ion-button>
         </ion-chip>
@@ -37,5 +37,5 @@
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
-  <ion-router-outlet *ngIf="!(user.userLogged$ | async)"></ion-router-outlet>
+  <ion-router-outlet *ngIf="!(user.userConnected$ | async)"></ion-router-outlet>
 </ion-app>

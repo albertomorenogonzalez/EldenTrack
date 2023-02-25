@@ -6,7 +6,7 @@ import { Boss } from '../../models/boss.model';
 import { CompletedBoss } from '../../models/completed-boss.model';
 import { BossService, UserService } from '../../services';
 import { CompletedBossService } from '../../services/completed-boss.service';
-import { LocaleService } from '../../services/locale.service';
+import { LocaleService } from '../../services/localeService';
 import { CompletedBossFormComponent } from '../completed-boss-form/completed-boss-form.component';
 
 @Component({

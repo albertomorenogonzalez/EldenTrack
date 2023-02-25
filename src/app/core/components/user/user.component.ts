@@ -6,7 +6,7 @@ import { FollowFormComponent } from '..';
 import { Boss, Follow } from '../../models';
 import { User } from '../../models/user.model';
 import { FollowService, UserService } from '../../services';
-import { LocaleService } from '../../services/locale.service';
+import { LocaleService } from '../../services/localeService';
 import { UserCompletedBossesComponent } from '../user-completed-bosses/user-completed-bosses.component';
 
 @Component({

@@ -29,7 +29,8 @@ export class CompletedBossFormComponent implements OnInit {
     private fb:FormBuilder,
     private modal:ModalController,
     private data:UserService,
-    private bossData: BossService
+    private bossData: BossService,
+    private toastController: ToastController
   ) { 
     this.form = this.fb.group({
       id:[null],

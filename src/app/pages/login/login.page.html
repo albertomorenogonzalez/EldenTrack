@@ -11,17 +11,14 @@
               <ion-card-title>{{'login.title' | translate}}</ion-card-title>
             </ion-card-header>
             <ion-card-content>
-              <form [formGroup]="form" (ngSubmit)="onSignIn()" (keyup.enter)="onSignIn()">
+              <form [formGroup]="form" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()">
                 <ion-item>
                   <ion-label position="floating">{{'login.user' | translate}}</ion-label>
                   <ion-input placeholder="Usuario" formControlName="username" type="text"></ion-input>
                 </ion-item>
                 <ion-item>
                   <ion-label position="floating">{{'login.password' | translate}}</ion-label>
-                  <ion-input placeholder="{{'login.password' | translate}}" (keyup.enter)="form.valid?onSignIn():null" [enterkeyhint]="'enter'" autocomplete="password" formControlName="password" #passwordEyeRegister  [type]="passwordTypeInput"  formControlName="password" clearOnEdit="false"></ion-input>
-                  <ion-button  item-end  class="btn_eye_icon"  (click)="togglePasswordMode()">
-                    <ion-icon slot="icon-only" [name]="(passwordTypeInput === 'text')?'eye-off':'eye'"></ion-icon>
-                  </ion-button>
+                  <ion-input placeholder="Contraseña" formControlName="password" type="password"></ion-input>
                 </ion-item>
                 <div class="login-submit-button">
                   <ion-button [disabled]="!form.valid" type="submit">{{'login.title' | translate}}</ion-button>
@@ -30,7 +27,7 @@
             </ion-card-content>
 
             <div id="register-button">
-              <ion-button (click)="register()" type="button">{{'title.register' | translate}}</ion-button>
+              <ion-button (click)="onNewUser()" type="button">{{'title.register' | translate}}</ion-button>
             </div>
           </ion-card>
           

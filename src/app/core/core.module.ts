@@ -2,7 +2,7 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { LocaleService } from './services/locale.service';
+import { LocaleService } from './services/localeService';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -15,10 +15,6 @@ import { CompletedBossFormComponent } from './components/completed-boss-form/com
 import { CompletedBossComponent } from './components/completed-boss/completed-boss.component';
 import { DateTimeSelectableComponent } from './components/date-time-selectable/date-time-selectable.component';
 import { BossFormComponent } from './components/boss-form/boss-form.component';
-import { IonicStorageModule } from '@ionic/storage-angular';
-import { Drivers } from '@ionic/storage';
-import { Camera } from '@awesome-cordova-plugins/camera/ngx';
-import { File } from '@awesome-cordova-plugins/file/ngx';
 
 export class LocaleId extends String{
   constructor(private locale:LocaleService){
@@ -62,10 +58,6 @@ registerLocaleData(en)
       deps: [HttpClient]
       }
       }),
-    IonicStorageModule.forRoot({
-      name: '__tareandodb',
-          driverOrder: [Drivers.IndexedDB, Drivers.LocalStorage]
-    }),
     ReactiveFormsModule
   ],
   exports:[

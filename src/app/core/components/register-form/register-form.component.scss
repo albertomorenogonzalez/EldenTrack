@@ -22,30 +22,3 @@ ion-button {
   margin-bottom:15px;
   margin-right:15px;
 }
-
-.btn_eye_icon{
-  width:7.5%;
-  position:absolute;
-  right: 0;
-  bottom: 4px;
-  z-index: 999;
-  --background: transparent;
-  ion-icon{
-      font-size: 22px;
-      color:#757575;
-  }
-}
-
-.btn_eye_icon:focus{
-  outline: none  !important;
-}
-
-.validationError{
-  color:var(--ion-color-danger);
-  font-size:0.8em;
-  display:flex;  
-  width:100%;  
-}
-.required{
-  color:var(--ion-color-danger);
-}
